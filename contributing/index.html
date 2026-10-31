@@ -16,6 +16,8 @@
         <link rel="prev" href="../resources/user/">
       
       
+        <link rel="next" href="architecture/">
+      
       
         
       
@@ -352,6 +354,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1018,6 +1048,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1170,34 +1256,29 @@ build (with mruby-mtest). CI requires both to pass.</p>
 bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>rake<span class="w"> </span>test:mruby<span class="w">   </span><span class="c1"># builds mruby with sadame into build/, then runs the suite</span>
 bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>rake<span class="w"> </span><span class="nb">test</span><span class="w">         </span><span class="c1"># both</span>
 </code></pre></div>
-<p><code>rake build:native</code> builds the binary alone, into <code>build/host/bin/sadame</code>.
-The first build clones mruby into <code>vendor/</code> and its gems into
-<code>build/repos/</code>; both are ignored by git.</p>
+<p><code>rake build:native</code> builds a development binary into
+<code>build/host/bin/sadame</code>. Release binaries, static Linux builds through
+Docker and the macOS builds, are described in
+<a href="https://enderkus.github.io/sadame/contributing/building/">Building sadame</a>.</p>
 <p>Tests never need root: resources are tested against <code>FakeShell</code>
 (<code>test/support/fake_shell.rb</code>), which records commands and returns stubbed
 results.</p>
 <h2 id="writing-code-for-mruby">Writing code for mruby<a class="headerlink" href="#writing-code-for-mruby" title="Permanent link">&para;</a></h2>
 <p>Release builds are a single mruby binary, so everything under <code>lib/</code> must
-run on mruby with only the gems listed in <code>build_config.rb</code>. In practice:</p>
+run on mruby with only the gems listed in <code>build_config.rb</code>:</p>
 <ul>
 <li>Never call <code>require</code> in <code>lib/</code>. To add a file, list it with
   <code>require_relative</code> in <code>lib/sadame.rb</code>; the mruby build reads that list to
   compile the same files in the same order.</li>
-<li>No standard library: no JSON, YAML, Open3, FileUtils, ERB, Shellwords,
-  OptionParser or Net::*. Sadame has small replacements
-  (<code>Sadame::JsonWriter</code>, <code>Sadame::Template</code>, <code>Sadame::Shell.escape</code>).</li>
-<li>Run commands only through <code>Sadame::Shell</code>.</li>
-<li>Avoid methods mruby lacks without extra gems, for example <code>Integer#zero?</code>,
-  <code>#even?</code> and <code>#odd?</code> (use <code>== 0</code>), enumerators without a block
-  (<code>map.with_index</code>, <code>each_slice(2).to_a</code>), <code>catch</code>/<code>throw</code>,
-  <code>File.basename(path, ext)</code> with two arguments, <code>String#unpack</code>, and
-  backticks.</li>
-<li>In a <code>rescue</code> clause, re-raise with <code>raise e</code>, not a bare <code>raise</code>: mruby
-  3.4 raises a new <code>RuntimeError</code> for a bare <code>raise</code>.</li>
-<li>Do not rely on <code>inspect</code> output in messages users see; its format differs
-  between runtimes.</li>
+<li>No standard library (JSON, YAML, ERB, Open3, FileUtils, ...). Sadame has
+  small replacements: <code>Sadame::JsonWriter</code>, <code>Sadame::Template</code>,
+  <code>Sadame::Shell.escape</code>.</li>
+<li>Run commands and read files only through <code>Sadame::Shell</code>.</li>
+<li>In a <code>rescue</code> clause, re-raise with <code>raise e</code>, not a bare <code>raise</code>.</li>
 </ul>
-<p>If you think a new mruby gem is needed, explain why in the commit that adds
+<p>The full list of pitfalls, with what to use instead, is in
+<a href="https://enderkus.github.io/sadame/contributing/architecture/#code-that-must-run-on-mruby">Architecture</a>.
+If you think a new mruby gem is needed, explain why in the commit that adds
 it to <code>build_config.rb</code>.</p>
 <h2 id="style">Style<a class="headerlink" href="#style" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1295,6 +1376,22 @@ MIT License.</p>
             </div>
           </a>
         
+        
+          
+          <a href="architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: Architecture">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Architecture
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
