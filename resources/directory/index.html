@@ -61,6 +61,29 @@
 
     
     
+  
+  
+    
+  
+  
+    
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sadame">
+  <meta property="og:title" content="directory - Sadame">
+  <meta property="og:description" content="Configuration management in plain Ruby, in one binary.">
+  
+    <meta property="og:url" content="https://enderkus.github.io/sadame/resources/directory/">
+  
+  <meta property="og:image" content="https://enderkus.github.io/sadame/assets/banner.png">
+  <meta property="og:image:width" content="2172">
+  <meta property="og:image:height" content="724">
+  <meta property="og:image:alt" content="Sadame">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="directory - Sadame">
+  <meta name="twitter:description" content="Configuration management in plain Ruby, in one binary.">
+  <meta name="twitter:image" content="https://enderkus.github.io/sadame/assets/banner.png">
+
   </head>
   
   
@@ -360,6 +383,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/plan-apply-drift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts: plan, apply, drift
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/drift-in-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide: drift in CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/json-output/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference: JSON output
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -453,6 +560,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recipes/notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -468,10 +603,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
             
   
   
@@ -489,8 +624,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1080,9 +1215,15 @@ directory, and to keep application directories owned by the right user.</p>
 </tr>
 <tr>
 <td><code>notifies</code></td>
-<td><code>[:action, "type[name]"]</code> or a list of them</td>
+<td><code>[:action, "type[name]"]</code>, optionally with <code>:immediately</code>, or a list of them</td>
 <td>none</td>
-<td>Actions to run at the end of <code>apply</code> if this resource changed.</td>
+<td>Actions to run on other resources when this one changes. See <a href="../../recipes/notifications/">Notifications</a>.</td>
+</tr>
+<tr>
+<td><code>subscribes</code></td>
+<td><code>[:action, "type[name]"]</code>, optionally with <code>:immediately</code>, or a list of them</td>
+<td>none</td>
+<td>Actions to run on this resource when another one changes.</td>
 </tr>
 </tbody>
 </table>
@@ -1125,7 +1266,15 @@ changed    directory[/srv/app/shared]
            group: www-data
 unchanged  directory[/srv/app/tmp]
 
-Apply: 2 changed, 1 unchanged, 0 failed.
+Summary
+  changed      2  directory[/srv/app]
+                  directory[/srv/app/shared]
+  unchanged    1
+  failed       0
+  skipped      0
+  notified     0
+
+Finished in 0.18s.
 
 $ sudo sadame plan examples/resources/directory
 sadame 0.1.0.dev plan on local (Debian GNU/Linux 12 (bookworm))

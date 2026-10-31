@@ -59,6 +59,29 @@
 
     
     
+  
+  
+    
+  
+  
+    
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sadame">
+  <meta property="og:title" content="Contributing - Sadame">
+  <meta property="og:description" content="Configuration management in plain Ruby, in one binary.">
+  
+    <meta property="og:url" content="https://enderkus.github.io/sadame/contributing/">
+  
+  <meta property="og:image" content="https://enderkus.github.io/sadame/assets/banner.png">
+  <meta property="og:image:width" content="2172">
+  <meta property="og:image:height" content="724">
+  <meta property="og:image:alt" content="Sadame">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contributing - Sadame">
+  <meta name="twitter:description" content="Configuration management in plain Ruby, in one binary.">
+  <meta name="twitter:image" content="https://enderkus.github.io/sadame/assets/banner.png">
+
   </head>
   
   
@@ -358,6 +381,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/plan-apply-drift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts: plan, apply, drift
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/drift-in-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide: drift in CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/json-output/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference: JSON output
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -451,6 +558,34 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../recipes/notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -462,10 +597,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
         
           
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
             
   
   
@@ -483,8 +618,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1083,7 +1218,13 @@ it to <code>build_config.rb</code>.</p>
   with <code>--8&lt;-- "examples/..."</code>. <code>test/unit/examples_test.rb</code> loads, plans
   and applies every example against a fake machine and checks that every
   <code>examples/</code> path mentioned in the docs exists.</li>
-<li>Output shown in the docs is copied from real runs, trimmed if needed.</li>
+<li>Terminal sessions in the docs are captured, not typed. Each one is
+  defined in <code>script/transcripts/scenarios.rb</code>, run in a fresh Docker
+  container by <code>rake docs:transcripts</code> (or <code>SCENARIO=name rake
+  docs:transcripts</code> for one), written to <code>docs/transcripts/</code>, and embedded
+  with <code>--8&lt;-- "docs/transcripts/NAME.txt"</code>. Short excerpts, such as a diff
+  shown on its own, are copied from those files. When a change alters
+  output, regenerate the transcripts and commit them with the change.</li>
 </ul>
 <p>Build the site locally with:</p>
 <div class="highlight"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv

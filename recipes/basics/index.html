@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://enderkus.github.io/sadame/recipes/basics/">
       
       
-        <link rel="prev" href="../../getting-started/">
+        <link rel="prev" href="../../reference/json-output/">
       
       
-        <link rel="next" href="../../resources/package/">
+        <link rel="next" href="../notifications/">
       
       
         
@@ -61,6 +61,29 @@
 
     
     
+  
+  
+    
+  
+  
+    
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sadame">
+  <meta property="og:title" content="Recipe basics - Sadame">
+  <meta property="og:description" content="Configuration management in plain Ruby, in one binary.">
+  
+    <meta property="og:url" content="https://enderkus.github.io/sadame/recipes/basics/">
+  
+  <meta property="og:image" content="https://enderkus.github.io/sadame/assets/banner.png">
+  <meta property="og:image:width" content="2172">
+  <meta property="og:image:height" content="724">
+  <meta property="og:image:alt" content="Sadame">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Recipe basics - Sadame">
+  <meta name="twitter:description" content="Configuration management in plain Ruby, in one binary.">
+  <meta name="twitter:image" content="https://enderkus.github.io/sadame/assets/banner.png">
+
   </head>
   
   
@@ -360,6 +383,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/plan-apply-drift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts: plan, apply, drift
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/drift-in-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide: drift in CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/json-output/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference: JSON output
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -579,6 +686,34 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -590,10 +725,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
         
           
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
             
   
   
@@ -611,8 +746,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1100,9 +1235,13 @@ Plan: 3 to create, 1 to update, 0 to remove, 0 to run, 0 unchanged.
 <li>An id may appear only once. Declaring <code>package "git"</code> twice is an error
   that names the file and line.</li>
 <li>Options are checked when the recipe loads. A misspelled option fails the
-  whole run before anything is changed:</li>
+  whole run, with exit status 2, before anything is changed:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>sadame: recipe.rb:2: file[/etc/motd]: unknown option :contents (valid options: content, group, locals, mode, notifies, owner, sensitive, source, state, template)
+<div class="highlight"><pre><span></span><code>$ sudo sadame plan
+sadame: recipe.rb:2: file[/etc/motd]: unknown option :contents (valid options: content, group, locals, mode, notifies, owner, sensitive, source, state, subscribes, template)
+
+$ echo $?
+2
 </code></pre></div>
 <ul>
 <li>Ruby code in a recipe runs every time the recipe is loaded, for <code>plan</code> as
@@ -1197,16 +1336,35 @@ always become symbols.</p>
 </table>
 <p>Adding a maintenance window for one run changes the template output:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics --var maintenance='Sundays 02:00-03:00 UTC'
-...
+sadame 0.1.0.dev plan on local (Debian GNU/Linux 12 (bookworm))
+
++ package[curl]
+    state: absent -&gt; installed
+
++ package[less]
+    state: absent -&gt; installed
+
++ directory[/etc/sadame-demo]
+    state: absent -&gt; present
+    mode: 0755
+
 ~ file[/etc/motd]
     --- /etc/motd
     +++ /etc/motd (desired)
     @@ -1,7 +1,4 @@
-    ...
+    -
+    -The programs included with the Debian GNU/Linux system are free software;
+    -the exact distribution terms for each program are described in the
+    -individual files in /usr/share/doc/*/copyright.
+    -
+    -Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+    -permitted by applicable law.
     +This machine is managed by sadame. Local changes will be overwritten.
     +Team:    platform
     +Contact: ops@example.com
     +Maintenance window: Sundays 02:00-03:00 UTC
+
+Plan: 3 to create, 1 to update, 0 to remove, 0 to run, 0 unchanged.
 </code></pre></div>
 <h2 id="include_recipe">include_recipe<a class="headerlink" href="#include_recipe" title="Permanent link">&para;</a></h2>
 <p><code>include_recipe "parts/motd"</code> evaluates <code>parts/motd.rb</code>. The path is
@@ -1277,14 +1435,18 @@ sadame 0.1.0.dev plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 3 unchanged.
 </code></pre></div>
-<p>An error in a template fails that resource and names the template and line:</p>
-<div class="highlight"><pre><span></span><code>$ sadame plan
+<p>An error in a template fails that resource and names the template and
+line. Here <code>templates/app.conf.erb</code> contains <code>port = &lt;%= port %&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code>$ sudo sadame plan
 sadame 0.1.0.dev plan on local (Debian GNU/Linux 12 (bookworm))
 
 x file[/etc/app.conf]
     error: templates/app.conf.erb:3: undefined local variable or method `port' for #&lt;Sadame::Template::Scope&gt;
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 0 unchanged, 1 failed.
+
+$ echo $?
+2
 </code></pre></div>
 <p>Here the template used <code>port</code> instead of <code>locals[:port]</code>. The wording after
 the line number comes from the Ruby runtime and differs slightly between the
@@ -1343,7 +1505,7 @@ single binary and CRuby.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../getting-started/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting started">
+          <a href="../../reference/json-output/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Reference: JSON output">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1353,20 +1515,20 @@ single binary and CRuby.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Getting started
+                Reference: JSON output
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../resources/package/" class="md-footer__link md-footer__link--next" aria-label="Next: package">
+          <a href="../notifications/" class="md-footer__link md-footer__link--next" aria-label="Next: Notifications">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                package
+                Notifications
               </div>
             </div>
             <div class="md-footer__button md-icon">
