@@ -583,6 +583,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../guides/remote-hosts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide: remote hosts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../guides/drift-in-ci/" class="md-nav__link">
         
   
@@ -726,6 +754,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../recipes/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../recipes/notifications/" class="md-nav__link">
         
   
@@ -764,10 +820,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -785,8 +841,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1386,7 +1442,10 @@ rake<span class="w"> </span>build:macos<span class="w">         </span><span cla
 <h2 id="uninstall">Uninstall<a class="headerlink" href="#uninstall" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>rm<span class="w"> </span>/usr/local/bin/sadame
 </code></pre></div>
-<p>Sadame keeps no other files on the machine it is installed on.</p>
+<p>Sadame keeps no other files on the machine it is installed on, except
+<code>~/.sadame/dist/</code>, where it keeps binaries it downloaded for pushing to
+other systems. On machines it was pushed to, it keeps <code>~/.sadame/</code> (see
+<a href="../guides/remote-hosts/#what-is-copied-where">Remote hosts</a>).</p>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Picking the wrong CPU.</strong> <code>uname -m</code> prints <code>x86_64</code> for

@@ -446,6 +446,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/remote-hosts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide: remote hosts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/drift-in-ci/" class="md-nav__link">
         
   
@@ -589,6 +617,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -627,10 +683,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -648,8 +704,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1475,7 +1531,47 @@ order; the mruby build compiles the same list.</p>
 <tbody>
 <tr>
 <td><code>cli.rb</code></td>
-<td>Parses arguments, loads vars and the recipe, runs a command, returns the exit status. <code>Sadame.main</code> is the entry point of the binary.</td>
+<td>Parses arguments, loads vars, the inventory and the recipe, runs a command locally or through push mode, returns the exit status. <code>Sadame.main</code> is the entry point of the binary.</td>
+</tr>
+<tr>
+<td><code>inventory.rb</code></td>
+<td>The <code>hosts.rb</code> language, groups and includes, and selecting targets with <code>-h</code>, <code>-g</code> and <code>--limit</code>, including each target's merged vars.</td>
+</tr>
+<tr>
+<td><code>target.rb</code></td>
+<td>A host to push to, and parsing <code>[user@]host[:port]</code>.</td>
+</tr>
+<tr>
+<td><code>glob.rb</code></td>
+<td><code>*</code> and <code>?</code> matching for <code>--limit</code>.</td>
+</tr>
+<tr>
+<td><code>hosts_listing.rb</code></td>
+<td>The output of <code>sadame hosts</code>.</td>
+</tr>
+<tr>
+<td><code>push/run.rb</code></td>
+<td>Push mode: bundles the recipe, detects each target's system, finds binaries, runs every target, prints the summary or the combined JSON.</td>
+</tr>
+<tr>
+<td><code>push/session.rb</code></td>
+<td>One target: copies the binary (once per checksum) and the recipe, runs sadame there.</td>
+</tr>
+<tr>
+<td><code>push/ssh.rb</code></td>
+<td>The <code>ssh</code> and <code>scp</code> command lines for a target.</td>
+</tr>
+<tr>
+<td><code>push/binary_store.rb</code></td>
+<td>Finds the binary for a target's system on the machine running sadame, downloading and checking it if needed.</td>
+</tr>
+<tr>
+<td><code>push/parallel.rb</code></td>
+<td>Runs one child process per target and prints their output as it arrives.</td>
+</tr>
+<tr>
+<td><code>ruby_literal.rb</code></td>
+<td>Writes values as Ruby source, to send vars to targets and results between processes.</td>
 </tr>
 <tr>
 <td><code>vars.rb</code></td>
@@ -1577,6 +1673,12 @@ order; the mruby build compiles the same list.</p>
    the run progresses or JSON at the end. <code>Report#exit_status</code> becomes the
    process exit status.</li>
 </ol>
+<p>In push mode, steps 2 to 5 happen on each target: <code>CLI</code> loads the
+inventory, <code>Inventory#select</code> turns the flags into <code>Target</code>s with their
+vars, and <code>Push::Run</code> copies the binary and the recipe to each target and
+runs <code>sadame COMMAND</code> there with <code>--vars-file</code>, <code>--host-name</code> and
+<code>--host-groups</code>, in one child process per target. The targets' own reports
+are streamed back (text) or collected into one document (JSON).</p>
 <h2 id="code-that-must-run-on-mruby">Code that must run on mruby<a class="headerlink" href="#code-that-must-run-on-mruby" title="Permanent link">&para;</a></h2>
 <p>Release builds are mruby, so code in <code>lib/</code> may only use the language and
 the gems in <code>build_config.rb</code>. CI runs the whole test suite on both

@@ -448,6 +448,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/remote-hosts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide: remote hosts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/drift-in-ci/" class="md-nav__link">
         
   
@@ -613,6 +641,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#push-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Push mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#using-it-with-jq" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -748,6 +787,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -786,10 +853,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -807,8 +874,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1241,6 +1308,17 @@
     <span class="md-ellipsis">
       
         Statuses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#push-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Push mode
       
     </span>
   </a>
@@ -1712,6 +1790,181 @@ load) go to standard error, and standard output stays empty.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="push-mode">Push mode<a class="headerlink" href="#push-mode" title="Permanent link">&para;</a></h2>
+<p>When sadame runs on remote hosts (<code>-h</code>, <code>-g</code>, <code>--limit</code>), <code>--json</code> prints
+one document for the whole run. Each host's report, as described above, is
+nested under <code>hosts</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format_version</code></td>
+<td>integer</td>
+<td>As above.</td>
+</tr>
+<tr>
+<td><code>sadame_version</code></td>
+<td>string</td>
+<td>Version of sadame on the machine that ran the push.</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>string</td>
+<td><code>"plan"</code>, <code>"apply"</code> or <code>"drift"</code>.</td>
+</tr>
+<tr>
+<td><code>hosts</code></td>
+<td>array</td>
+<td>One object per host, in the order they were selected.</td>
+</tr>
+<tr>
+<td><code>hosts[].name</code></td>
+<td>string</td>
+<td>The host's name from the inventory or <code>-h</code>.</td>
+</tr>
+<tr>
+<td><code>hosts[].status</code></td>
+<td>string</td>
+<td><code>"ok"</code>, <code>"drift"</code>, <code>"failed"</code>, <code>"error"</code> or <code>"unreachable"</code>; see <a href="../../guides/remote-hosts/#many-hosts-at-once">Remote hosts</a>.</td>
+</tr>
+<tr>
+<td><code>hosts[].exit_status</code></td>
+<td>integer</td>
+<td>That host's exit status; <code>2</code> when it could not be reached or prepared.</td>
+</tr>
+<tr>
+<td><code>hosts[].error</code></td>
+<td>string or null</td>
+<td>Why the host could not be reached or prepared, or sadame's error message.</td>
+</tr>
+<tr>
+<td><code>hosts[].report</code></td>
+<td>object or null</td>
+<td>The host's report; <code>null</code> when sadame did not run there.</td>
+</tr>
+<tr>
+<td><code>exit_status</code></td>
+<td>integer</td>
+<td>The highest exit status of all hosts: the run's exit status.</td>
+</tr>
+<tr>
+<td><code>duration_seconds</code></td>
+<td>number</td>
+<td>Wall-clock time of the whole run.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, a drift check on one web server after its configuration was
+edited by hand:</p>
+<div class="highlight"><pre><span></span><code>$ sadame drift site.rb -h web2.example.com --json
+{
+  "format_version": 1,
+  "sadame_version": "0.1.0.dev",
+  "command": "drift",
+  "hosts": [
+    {
+      "name": "web2.example.com",
+      "status": "drift",
+      "exit_status": 1,
+      "error": null,
+      "report": {
+        "format_version": 1,
+        "sadame_version": "0.1.0.dev",
+        "command": "drift",
+        "host": "web2.example.com",
+        "platform": {
+          "name": "Debian GNU/Linux 12 (bookworm)",
+          "family": "debian",
+          "package_manager": "apt"
+        },
+        "resources": [
+          {
+            "id": "file[/etc/motd]",
+            "type": "file",
+            "name": "/etc/motd",
+            "status": "unchanged",
+            "changes": [],
+            "notifications": [],
+            "error": null
+          },
+          {
+            "id": "package[nginx]",
+            "type": "package",
+            "name": "nginx",
+            "status": "unchanged",
+            "changes": [],
+            "notifications": [],
+            "error": null
+          },
+          {
+            "id": "directory[/etc/demo-app]",
+            "type": "directory",
+            "name": "/etc/demo-app",
+            "status": "unchanged",
+            "changes": [],
+            "notifications": [],
+            "error": null
+          },
+          {
+            "id": "file[/etc/demo-app/web.conf]",
+            "type": "file",
+            "name": "/etc/demo-app/web.conf",
+            "status": "update",
+            "changes": [
+              {
+                "attribute": "content",
+                "sensitive": false,
+                "diff": "--- current\n+++ desired\n@@ -1,3 +1,3 @@\n # Managed by sadame.\n environment = production\n-workers     = 12\n+workers     = 8\n"
+              }
+            ],
+            "notifications": [],
+            "error": null
+          },
+          {
+            "id": "file[/etc/nginx/conf.d/demo-app.conf]",
+            "type": "file",
+            "name": "/etc/nginx/conf.d/demo-app.conf",
+            "status": "unchanged",
+            "changes": [],
+            "notifications": [],
+            "error": null
+          },
+          {
+            "id": "service[nginx]",
+            "type": "service",
+            "name": "nginx",
+            "status": "unchanged",
+            "changes": [],
+            "notifications": [],
+            "error": null
+          }
+        ],
+        "notifications": [],
+        "summary": {
+          "create": 0,
+          "update": 1,
+          "remove": 0,
+          "run": 0,
+          "unchanged": 5,
+          "failed": 0
+        },
+        "drift": true,
+        "failed": false,
+        "exit_status": 1,
+        "duration_seconds": 0.01
+      }
+    }
+  ],
+  "exit_status": 1,
+  "duration_seconds": 0.21
+}
+</code></pre></div>
 <h2 id="using-it-with-jq">Using it with jq<a class="headerlink" href="#using-it-with-jq" title="Permanent link">&para;</a></h2>
 <p>Resources that differ, from a saved drift report:</p>
 <div class="highlight"><pre><span></span><code>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'.resources[] | select(.status != "unchanged") | "\(.id): \(.status)"'</span><span class="w"> </span>drift.json
