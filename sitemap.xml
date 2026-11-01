@@ -5,6 +5,14 @@
          <lastmod>2026-11-01</lastmod>
     </url>
     <url>
+         <loc>https://enderkus.github.io/sadame/changelog/</loc>
+         <lastmod>2026-11-01</lastmod>
+    </url>
+    <url>
+         <loc>https://enderkus.github.io/sadame/comparison/</loc>
+         <lastmod>2026-11-01</lastmod>
+    </url>
+    <url>
          <loc>https://enderkus.github.io/sadame/faq/</loc>
          <lastmod>2026-11-01</lastmod>
     </url>
@@ -78,6 +86,14 @@
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/recipes/notifications/</loc>
+         <lastmod>2026-11-01</lastmod>
+    </url>
+    <url>
+         <loc>https://enderkus.github.io/sadame/reference/cli/</loc>
+         <lastmod>2026-11-01</lastmod>
+    </url>
+    <url>
+         <loc>https://enderkus.github.io/sadame/reference/exit-codes/</loc>
          <lastmod>2026-11-01</lastmod>
     </url>
     <url>
