@@ -16,7 +16,7 @@
         <link rel="prev" href="../inventory/">
       
       
-        <link rel="next" href="../notifications/">
+        <link rel="next" href="../tags/">
       
       
         
@@ -732,6 +732,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2092,19 +2120,19 @@ reports it until it is applied.</p>
 <code>--limit</code> it connects to those hosts, as <code>plan</code> does, and prints theirs.
 <code>--json</code> prints them as JSON (see <a href="../../reference/json-output/#facts">JSON output</a>).</p>
 <div class="highlight"><pre><span></span><code>$ sadame facts
-sadame 0.3.0 facts on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 facts on local (Debian GNU/Linux 12 (bookworm))
 
-hostname           8a67e917846a
-fqdn               8a67e917846a
+hostname           8d5eee1b3778
+fqdn               8d5eee1b3778
 arch               x86_64
 kernel             7.2.12-orbstack-00394-gbecdd6130068
 cpus               10
 memory_mb          8003
 swap_mb            9027
-root_disk_gb       140
-ipv4               192.168.215.3
+root_disk_gb       139
+ipv4               192.168.215.2
 default_interface  eth0
-ipv4_addresses     192.168.215.3
+ipv4_addresses     192.168.215.2
 ipv6_addresses     (none)
 virtualization     docker
 container          true
@@ -2112,7 +2140,7 @@ service_manager    (none)
 machine_id         (none)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame facts -h web1.example.com
-[web1.example.com] sadame 0.3.0 facts on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.4.0 facts on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
 [web1.example.com] hostname           web1
 [web1.example.com] fqdn               web1
@@ -2121,7 +2149,7 @@ machine_id         (none)
 [web1.example.com] cpus               10
 [web1.example.com] memory_mb          8003
 [web1.example.com] swap_mb            9027
-[web1.example.com] root_disk_gb       140
+[web1.example.com] root_disk_gb       139
 [web1.example.com] ipv4               192.168.107.3
 [web1.example.com] default_interface  eth0
 [web1.example.com] ipv4_addresses     192.168.107.3
@@ -2134,7 +2162,7 @@ machine_id         (none)
 Hosts
   web1.example.com  ok
 
-facts on 1 host: 1 ok. Finished in 0.21s.
+facts on 1 host: 1 ok. Finished in 0.23s.
 </code></pre></div>
 <h2 id="scenarios">Scenarios<a class="headerlink" href="#scenarios" title="Permanent link">&para;</a></h2>
 <div class="highlight"><span class="filename">examples/facts/recipe.rb</span><pre><span></span><code><span class="c1"># What a recipe can know about the machine it runs on. Each fact is read on</span>
@@ -2173,7 +2201,7 @@ facts on 1 host: 1 ok. Finished in 0.21s.
 <p>The container has no <code>/etc/machine-id</code>, so the minute comes from the
 hostname, and <code>container</code> is true, so the kernel setting is left out:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/facts
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/motd]
     --- /etc/motd
@@ -2186,9 +2214,9 @@ sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
     -
     -Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
     -permitted by applicable law.
-    +8a67e917846a, docker
-    +10 CPUs, 8003 MB of memory, 140 GB on /
-    +192.168.215.3 on eth0
+    +8d5eee1b3778, docker
+    +10 CPUs, 8003 MB of memory, 139 GB on /
+    +192.168.215.2 on eth0
     +Managed by sadame.
 
 + directory[/etc/demo-app]
@@ -2203,7 +2231,7 @@ sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
     @@ -0,0 +1,3 @@
     +workers = 20
     +cache_mb = 1000
-    +listen = 192.168.215.3:8080
+    +listen = 192.168.215.2:8080
 
 + file[/etc/demo-app/nightly.schedule]
     state: absent -&gt; present
@@ -2211,7 +2239,7 @@ sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
     --- /dev/null
     +++ /etc/demo-app/nightly.schedule (desired)
     @@ -0,0 +1 @@
-    +3 4 * * *
+    +36 4 * * *
 
 Plan: 3 to create, 1 to update, 0 to remove, 0 to run, 0 unchanged.
 </code></pre></div>
@@ -2292,13 +2320,13 @@ unless vars set it:</p>
         
         
           
-          <a href="../notifications/" class="md-footer__link md-footer__link--next" aria-label="Next: Notifications">
+          <a href="../tags/" class="md-footer__link md-footer__link--next" aria-label="Next: Tags">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Notifications
+                Tags
               </div>
             </div>
             <div class="md-footer__button md-icon">

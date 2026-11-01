@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -2009,7 +2037,7 @@ home directory to manage. The output below comes from an Arch Linux ARM
 container on an ARM64 machine, where <code>yay</code> is missing, so the AUR step is
 skipped; on Omarchy it runs.</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/12-omarchy-workstation
-sadame 0.3.0 plan on local (Arch Linux ARM)
+sadame 0.4.0 plan on local (Arch Linux ARM)
 
 + package[git]
     state: absent -&gt; installed
@@ -2146,7 +2174,7 @@ sadame 0.3.0 plan on local (Arch Linux ARM)
 Plan: 16 to create, 1 to update, 0 to remove, 2 to run, 2 unchanged.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/12-omarchy-workstation
-sadame 0.3.0 apply on local (Arch Linux ARM)
+sadame 0.4.0 apply on local (Arch Linux ARM)
 
 changed    package[git]
            state: absent -&gt; installed
@@ -2290,14 +2318,14 @@ Summary
   notified     2  exec[reload alice's systemd units]: run
                   exec[reload alice's systemd units]: run
 
-Finished in 21.14s.
+Finished in 26.09s.
 </code></pre></div>
 <p>The two <code>notified</code> lines are <code>systemctl --user daemon-reload</code> running
 right after each unit file was written (<code>:immediately</code>), before the timer
 is enabled.</p>
 <h2 id="did-i-break-my-laptop">Did I break my laptop?<a class="headerlink" href="#did-i-break-my-laptop" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>$ sudo sadame drift examples/12-omarchy-workstation
-sadame 0.3.0 drift on local (Arch Linux ARM)
+sadame 0.4.0 drift on local (Arch Linux ARM)
 
 No drift: 21 resources match the recipe.
 
@@ -2310,7 +2338,7 @@ $ echo $?
 $ rm ~/.local/bin/update-system
 
 $ sudo sadame drift examples/12-omarchy-workstation
-sadame 0.3.0 drift on local (Arch Linux ARM)
+sadame 0.4.0 drift on local (Arch Linux ARM)
 
 ~ file[/home/alice/.gitconfig]
     --- /home/alice/.gitconfig
@@ -2344,7 +2372,7 @@ $ echo $?
 </code></pre></div>
 <p><code>apply</code> puts both back:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/12-omarchy-workstation
-sadame 0.3.0 apply on local (Arch Linux ARM)
+sadame 0.4.0 apply on local (Arch Linux ARM)
 
 unchanged  package[git]
 unchanged  package[htop]

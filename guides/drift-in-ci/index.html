@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1929,9 +1957,9 @@ and writes one JSON document with every host's report (see
 <p>On the console, the same run shows each host's differences prefixed with
 its name, and a summary:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift site.rb --limit 'web*'
-[web2.example.com] sadame 0.3.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
-[web1.example.com] sadame 0.3.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.4.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
+[web2.example.com] sadame 0.4.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
 [web2.example.com] ~ file[/etc/demo-app/web.conf]
 [web2.example.com]     --- /etc/demo-app/web.conf
@@ -1949,7 +1977,7 @@ Hosts
   web1.example.com  ok
   web2.example.com  drift
 
-drift on 2 hosts: 1 ok, 1 drift. Finished in 0.22s.
+drift on 2 hosts: 1 ok, 1 drift. Finished in 0.24s.
 
 $ echo $?
 1
@@ -1971,8 +1999,8 @@ release. To pin a version, set <code>SADAME_VERSION</code> (see
 <p>Copy this to <code>.github/workflows/drift.yml</code> and add the two secrets under
 <strong>Settings &gt; Secrets and variables &gt; Actions</strong>:</p>
 <div class="highlight"><span class="filename">examples/ci/github-actions-drift.yml</span><pre><span></span><code><span class="c1"># Checks the servers in the inventory for drift every morning and fails the</span>
-<span class="c1"># workflow when one differs from the recipe. The JSON report is kept as an</span>
-<span class="c1"># artifact either way.</span>
+<span class="c1"># workflow when one differs from the recipe. The run's summary page shows</span>
+<span class="c1"># what differs, and the JSON report is kept as an artifact either way.</span>
 <span class="c1">#</span>
 <span class="c1"># Copy to .github/workflows/drift.yml in the repository that holds your</span>
 <span class="c1"># recipe (here in site/, with site/hosts.rb). It needs repository secrets</span>
@@ -2007,6 +2035,10 @@ release. To pin a version, set <code>SADAME_VERSION</code> (see
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check for drift</span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sadame drift site/site.rb -g all --json &gt; drift.json</span>
 
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Summarize</span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sadame report drift.json &gt;&gt; "$GITHUB_STEP_SUMMARY"</span>
+
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Keep the drift report</span>
 <span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v7</span>
@@ -2014,15 +2046,20 @@ release. To pin a version, set <code>SADAME_VERSION</code> (see
 <span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drift-report</span>
 <span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drift.json</span>
 </code></pre></div>
-<p><code>if: always()</code> on the upload step is what keeps the report when the drift
-step fails, which is when you need it. The report appears under the run's
-<strong>Artifacts</strong> as <code>drift-report</code>.</p>
+<p><code>sadame report drift.json</code> turns the JSON into Markdown for the run's
+summary page: a table of hosts, and for each host that differs the
+resources with their diffs. <code>if: always()</code> on the last two steps is what
+keeps the summary and the report when the drift step fails, which is when
+you need them. The report appears under the run's <strong>Artifacts</strong> as
+<code>drift-report</code>.</p>
+<p><code>sadame init --ci github</code> writes this workflow, with the path of your
+recipe, to <code>.github/workflows/sadame-drift.yml</code>.</p>
 <h2 id="gitlab-ci">GitLab CI<a class="headerlink" href="#gitlab-ci" title="Permanent link">&para;</a></h2>
 <p>Add this job to <code>.gitlab-ci.yml</code>, add the two values as CI/CD variables,
 and create a pipeline schedule under <strong>Build &gt; Pipeline schedules</strong>:</p>
 <div class="highlight"><span class="filename">examples/ci/gitlab-ci-drift.yml</span><pre><span></span><code><span class="c1"># Checks the servers in the inventory for drift in scheduled pipelines and</span>
-<span class="c1"># fails the job when one differs from the recipe. The JSON report is kept as</span>
-<span class="c1"># an artifact either way.</span>
+<span class="c1"># fails the job when one differs from the recipe. The pipeline's test report</span>
+<span class="c1"># shows what differs, and the JSON report is kept as an artifact either way.</span>
 <span class="c1">#</span>
 <span class="c1"># Add this job to .gitlab-ci.yml in the project that holds your recipe (here</span>
 <span class="c1"># in site/, with site/hosts.rb) and create a pipeline schedule. It needs</span>
@@ -2043,17 +2080,85 @@ and create a pipeline schedule under <strong>Build &gt; Pipeline schedules</stro
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># Exit status: 0 no drift, 1 drift on a server, 2 a server could not be checked.</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sadame drift site/site.rb -g all --json &gt; drift.json</span>
+<span class="w">  </span><span class="nt">after_script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sadame report drift.json --format junit &gt; drift.xml</span>
 <span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 <span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drift.json</span>
+<span class="w">    </span><span class="nt">reports</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">junit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drift.xml</span>
 <span class="w">    </span><span class="nt">expire_in</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30 days</span>
 </code></pre></div>
-<p><code>artifacts: when: always</code> keeps <code>drift.json</code> on failed jobs too.</p>
+<p><code>after_script</code> turns the JSON into JUnit XML with
+<code>sadame report drift.json --format junit</code>, and <code>reports: junit:</code> hands it to
+GitLab, which shows each host as a test suite and each drifted resource as a
+failed test, with its diff, on the pipeline's <strong>Tests</strong> tab.
+<code>artifacts: when: always</code> keeps <code>drift.json</code> on failed jobs too.</p>
+<p><code>sadame init --ci gitlab</code> writes this job, with the path of your recipe, to
+<code>.gitlab/sadame-drift.yml</code>, to include from <code>.gitlab-ci.yml</code>.</p>
 <h2 id="reading-the-report">Reading the report<a class="headerlink" href="#reading-the-report" title="Permanent link">&para;</a></h2>
-<p>The report has one entry per host with its status and full report; the
+<p><code>sadame report</code> prints the summary the workflows above put on the run's
+page:</p>
+<div class="highlight"><pre><span></span><code>$ sadame report drift.json
+### sadame drift on 2 hosts: 1 ok, 1 drift
+
+| Host | Result | Resources |
+|---|---|---|
+| web1.example.com | ok | 6 unchanged |
+| web2.example.com | **drift** | 1 of 6 differ |
+
+&lt;details&gt;
+&lt;summary&gt;web2.example.com: 1 of 6 differ&lt;/summary&gt;
+
+**~ file[/etc/demo-app/web.conf]**
+
+```diff
+--- current
++++ desired
+@@ -1,3 +1,3 @@
+ # Managed by sadame.
+ environment = production
+-workers     = 12
++workers     = 8
+</code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code>and with `--format junit`, JUnit XML for any CI system that reads test
+reports (Jenkins, GitLab, Azure Pipelines and others):
+
+```text
+$ sadame report drift.json --format junit
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;testsuites name="sadame drift" tests="12" failures="1" errors="0"&gt;
+  &lt;testsuite name="web1.example.com" tests="6" failures="0" errors="0"&gt;
+    &lt;testcase classname="web1.example.com" name="file[/etc/motd]"/&gt;
+    &lt;testcase classname="web1.example.com" name="package[nginx]"/&gt;
+    &lt;testcase classname="web1.example.com" name="directory[/etc/demo-app]"/&gt;
+    &lt;testcase classname="web1.example.com" name="file[/etc/demo-app/web.conf]"/&gt;
+    &lt;testcase classname="web1.example.com" name="file[/etc/nginx/conf.d/demo-app.conf]"/&gt;
+    &lt;testcase classname="web1.example.com" name="service[nginx]"/&gt;
+  &lt;/testsuite&gt;
+  &lt;testsuite name="web2.example.com" tests="6" failures="1" errors="0"&gt;
+    &lt;testcase classname="web2.example.com" name="file[/etc/motd]"/&gt;
+    &lt;testcase classname="web2.example.com" name="package[nginx]"/&gt;
+    &lt;testcase classname="web2.example.com" name="directory[/etc/demo-app]"/&gt;
+    &lt;testcase classname="web2.example.com" name="file[/etc/demo-app/web.conf]"&gt;
+      &lt;failure message="differs from the recipe" type="update"&gt;--- current
++++ desired
+@@ -1,3 +1,3 @@
+ # Managed by sadame.
+ environment = production
+-workers     = 12
++workers     = 8&lt;/failure&gt;
+    &lt;/testcase&gt;
+    &lt;testcase classname="web2.example.com" name="file[/etc/nginx/conf.d/demo-app.conf]"/&gt;
+    &lt;testcase classname="web2.example.com" name="service[nginx]"/&gt;
+  &lt;/testsuite&gt;
+&lt;/testsuites&gt;
+</code></pre></div>
+<p>The JSON has one entry per host with its status and full report; the
 format is in the <a href="../../reference/json-output/#push-mode">JSON output reference</a>.
-This lists the resources that drifted, per host:</p>
+With <code>jq</code>, this lists the resources that drifted, per host:</p>
 <div class="highlight"><pre><span></span><code>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'.hosts[] | .name as $host | (.report.resources // [])[]</span>
 <span class="s1">       | select(.status != "unchanged") | "\($host): \(.id) \(.status)"'</span><span class="w"> </span>drift.json
 </code></pre></div>

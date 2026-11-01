@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1992,7 +2020,7 @@ the link should be is always an error, even with <code>force: true</code>.</p>
 </code></pre></div>
 <h3 id="releases-and-a-current-link">Releases and a current link<a class="headerlink" href="#releases-and-a-current-link" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/link
-sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    directory[/srv/app/releases/1]
            state: absent -&gt; present
@@ -2038,7 +2066,7 @@ release 2
 <div class="highlight"><pre><span></span><code>$ sudo ln -sfn releases/1 /srv/app/current
 
 $ sudo sadame drift examples/resources/link
-sadame 0.3.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 ~ link[/srv/app/current]
     to: releases/1 -&gt; releases/2
@@ -2046,7 +2074,7 @@ sadame 0.3.0 drift on local (Debian GNU/Linux 12 (bookworm))
 Drift: 1 of 6 resources differs from the recipe.
 
 $ sudo sadame apply examples/resources/link
-sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  directory[/srv/app/releases/1]
 unchanged  directory[/srv/app/releases/2]

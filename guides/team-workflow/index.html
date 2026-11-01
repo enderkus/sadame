@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1909,11 +1937,14 @@ repository: read them from the environment in <code>vars.rb</code>
 them <code>sensitive: true</code> so their content does not appear in plans.</p>
 <h2 id="review-the-plan-not-only-the-code">Review the plan, not only the code<a class="headerlink" href="#review-the-plan-not-only-the-code" title="Permanent link">&para;</a></h2>
 <p>A recipe change is easier to review with its effect next to it. This
-pipeline runs <code>sadame plan</code> against every server on each pull request and
-puts the output on the run's summary page:</p>
-<div class="highlight"><span class="filename">examples/ci/github-actions-plan.yml</span><pre><span></span><code><span class="c1"># Shows what a pull request would change on every server: runs `sadame plan`</span>
-<span class="c1"># against the inventory and puts the output on the run's summary page, next</span>
-<span class="c1"># to the code being reviewed. It changes nothing.</span>
+pipeline first checks the recipe for every host with <code>sadame validate</code>,
+which connects to nothing and so also works for pull requests that cannot
+read the SSH secrets, then runs <code>sadame plan</code> against every server and puts
+the output on the run's summary page:</p>
+<div class="highlight"><span class="filename">examples/ci/github-actions-plan.yml</span><pre><span></span><code><span class="c1"># Shows what a pull request would change on every server: checks the recipe</span>
+<span class="c1"># for every host first, without connecting (sadame validate), then runs</span>
+<span class="c1"># `sadame plan` against the inventory and puts the output on the run's</span>
+<span class="c1"># summary page, next to the code being reviewed. It changes nothing.</span>
 <span class="c1">#</span>
 <span class="c1"># Copy to .github/workflows/plan.yml. It needs the same secrets as</span>
 <span class="c1"># github-actions-drift.yml: SSH_PRIVATE_KEY and SSH_KNOWN_HOSTS.</span>
@@ -1931,6 +1962,11 @@ puts the output on the run's summary page:</p>
 
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install sadame</span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">curl -fsSL https://raw.githubusercontent.com/enderkus/sadame/main/install.sh | sh</span>
+
+<span class="w">      </span><span class="c1"># Typos, unknown options and template errors, for every host, before</span>
+<span class="w">      </span><span class="c1"># anything connects to a server.</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Validate the recipe</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sadame validate site/site.rb -g all</span>
 
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up SSH</span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>

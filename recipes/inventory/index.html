@@ -755,6 +755,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -1991,7 +2019,7 @@ file or a cloud provider's CLI. There is no plugin system to learn.</p>
 <p><code>sadame hosts</code> shows what sadame makes of it: every host, how it will be
 reached, and each var with the layer it came from:</p>
 <div class="highlight"><pre><span></span><code>$ sadame hosts
-sadame 0.3.0 hosts: 3 hosts from hosts.rb
+sadame 0.4.0 hosts: 3 hosts from hosts.rb
 
 web1.example.com
   address   web1.example.com
@@ -2160,7 +2188,7 @@ wins for the same key:</p>
 for <code>web2</code>; <code>env</code> is <code>"staging"</code> in <code>vars.rb</code> but <code>"production"</code> from
 <code>all</code>, which includes <code>web</code> and <code>db</code>. <code>--var</code> overrides all of them:</p>
 <div class="highlight"><pre><span></span><code>$ sadame hosts --limit web2.example.com --var workers=16
-sadame 0.3.0 hosts: 1 host from hosts.rb
+sadame 0.4.0 hosts: 1 host from hosts.rb
 
 web2.example.com
   address   web2.example.com
@@ -2214,8 +2242,10 @@ example's <code>site.rb</code> picks roles that way:</p>
 <span class="c1"># hosts.rb. Run it on all of them with: sadame apply site.rb -g all</span>
 <span class="n">file</span><span class="w"> </span><span class="s2">"/etc/motd"</span><span class="p">,</span><span class="w"> </span><span class="ss">template</span><span class="p">:</span><span class="w"> </span><span class="s2">"motd.erb"</span><span class="p">,</span><span class="w"> </span><span class="ss">locals</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">name</span><span class="p">:</span><span class="w"> </span><span class="n">host_name</span><span class="p">,</span><span class="w"> </span><span class="ss">groups</span><span class="p">:</span><span class="w"> </span><span class="n">host_groups</span><span class="w"> </span><span class="p">}</span>
 
-<span class="n">include_recipe</span><span class="w"> </span><span class="s2">"roles/web"</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">host_groups</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="ss">:web</span><span class="p">)</span>
-<span class="n">include_recipe</span><span class="w"> </span><span class="s2">"roles/db"</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">host_groups</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="ss">:db</span><span class="p">)</span>
+<span class="c1"># Each role's resources are tagged with the role, so --tags web plans or</span>
+<span class="c1"># applies only the web role, without the base.</span>
+<span class="n">include_recipe</span><span class="w"> </span><span class="s2">"roles/web"</span><span class="p">,</span><span class="w"> </span><span class="ss">tags</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="ss">:web</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">host_groups</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="ss">:web</span><span class="p">)</span>
+<span class="n">include_recipe</span><span class="w"> </span><span class="s2">"roles/db"</span><span class="p">,</span><span class="w"> </span><span class="ss">tags</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="ss">:db</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">host_groups</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="ss">:db</span><span class="p">)</span>
 </code></pre></div>
 <p><code>host_name</code> is the host's name from the inventory or <code>-h</code>. For local runs
 they are <code>"local"</code> and <code>[]</code>, unless set with <code>--host-name</code> and
@@ -2250,7 +2280,7 @@ they are <code>"local"</code> and <code>[]</code>, unless set with <code>--host-
 <span class="p">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame hosts -g db
-sadame 0.3.0 hosts: 1 host from hosts.rb
+sadame 0.4.0 hosts: 1 host from hosts.rb
 
 db1.example.com
   address   203.0.113.21

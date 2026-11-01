@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -2074,7 +2102,7 @@ or removes when the answer differs from the recipe.</p>
 </code></pre></div>
 <h3 id="debian-12">Debian 12<a class="headerlink" href="#debian-12" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/package
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[tree]
     state: absent -&gt; installed
@@ -2085,7 +2113,7 @@ sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 
 $ sudo sadame apply examples/resources/package
-sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[tree]
            state: absent -&gt; installed
@@ -2101,17 +2129,17 @@ Summary
   skipped      0
   notified     0
 
-Finished in 6.44s.
+Finished in 5.68s.
 
 $ sudo sadame plan examples/resources/package
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 3 unchanged.
 </code></pre></div>
 <h3 id="arch-linux">Arch Linux<a class="headerlink" href="#arch-linux" title="Permanent link">&para;</a></h3>
 <p>The same recipe, unchanged, on Arch:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/package
-sadame 0.3.0 plan on local (Arch Linux)
+sadame 0.4.0 plan on local (Arch Linux)
 
 + package[tree]
     state: absent -&gt; installed
@@ -2122,7 +2150,7 @@ sadame 0.3.0 plan on local (Arch Linux)
 Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 
 $ sudo sadame apply examples/resources/package
-sadame 0.3.0 apply on local (Arch Linux)
+sadame 0.4.0 apply on local (Arch Linux)
 
 changed    package[tree]
            state: absent -&gt; installed
@@ -2138,7 +2166,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 2.85s.
+Finished in 2.70s.
 
 $ pacman -Q tree htop
 tree 2.3.2-1
@@ -2151,7 +2179,7 @@ htop 3.5.3-1
 <span class="n">package</span><span class="w"> </span><span class="n">web_server</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/package/by_family.rb
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[apache2]
     state: absent -&gt; installed
@@ -2182,7 +2210,7 @@ be able to run <code>pacman</code> with sudo without a password prompt: sadame r
 commands with standard input closed and cannot answer one. Without <code>yay</code>
 installed, <code>only_if</code> skips the resource:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/package/aur.rb
-sadame 0.3.0 plan on local (Arch Linux)
+sadame 0.4.0 plan on local (Arch Linux)
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 </code></pre></div>

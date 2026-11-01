@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1504,6 +1532,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#facts" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1931,6 +1970,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#facts" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2009,7 +2059,7 @@ load) go to standard error, and standard output stays empty.</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame drift examples/10-drift-demo --json
 {
   "format_version": 1,
-  "sadame_version": "0.3.0",
+  "sadame_version": "0.4.0",
   "command": "drift",
   "host": "local",
   "platform": {
@@ -2017,6 +2067,8 @@ load) go to standard error, and standard output stays empty.</p>
     "family": "debian",
     "package_manager": "apt"
   },
+  "tags": [],
+  "skip_tags": [],
   "resources": [
     {
       "id": "package[nginx]",
@@ -2132,9 +2184,14 @@ load) go to standard error, and standard output stays empty.</p>
 <td>See <a href="#platform">platform</a>.</td>
 </tr>
 <tr>
+<td><code>tags</code>, <code>skip_tags</code></td>
+<td>array of strings</td>
+<td>The <code>--tags</code> and <code>--skip-tags</code> of the run; empty without them.</td>
+</tr>
+<tr>
 <td><code>resources</code></td>
 <td>array</td>
-<td>One <a href="#resource">resource</a> object per declared resource, in recipe order.</td>
+<td>One <a href="#resource">resource</a> object per declared resource, in recipe order; with <code>--tags</code> or <code>--skip-tags</code>, per selected resource.</td>
 </tr>
 <tr>
 <td><code>notifications</code></td>
@@ -2481,7 +2538,7 @@ edited by hand:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift site.rb -h web2.example.com --json
 {
   "format_version": 1,
-  "sadame_version": "0.3.0",
+  "sadame_version": "0.4.0",
   "command": "drift",
   "hosts": [
     {
@@ -2491,7 +2548,7 @@ edited by hand:</p>
       "error": null,
       "report": {
         "format_version": 1,
-        "sadame_version": "0.3.0",
+        "sadame_version": "0.4.0",
         "command": "drift",
         "host": "web2.example.com",
         "platform": {
@@ -2499,6 +2556,8 @@ edited by hand:</p>
           "family": "debian",
           "package_manager": "apt"
         },
+        "tags": [],
+        "skip_tags": [],
         "resources": [
           {
             "id": "file[/etc/motd]",
@@ -2578,9 +2637,14 @@ edited by hand:</p>
     }
   ],
   "exit_status": 1,
-  "duration_seconds": 0.21
+  "duration_seconds": 0.22
 }
 </code></pre></div>
+<h2 id="validate">validate<a class="headerlink" href="#validate" title="Permanent link">&para;</a></h2>
+<p><code>sadame validate --json</code> prints <code>format_version</code>, <code>sadame_version</code>,
+<code>command</code> (<code>"validate"</code>), <code>recipe</code>, <code>platform</code>, <code>exit_status</code>, and <code>hosts</code>:
+one object per host with <code>name</code>, <code>status</code> (<code>"ok"</code> or <code>"error"</code>),
+<code>resources</code> (how many the recipe declared; <code>null</code> on error) and <code>error</code>.</p>
 <h2 id="facts">facts<a class="headerlink" href="#facts" title="Permanent link">&para;</a></h2>
 <p><code>sadame facts --json</code> prints one document per machine. With <code>-h</code>, <code>-g</code> or
 <code>--limit</code>, each host's document is the <code>report</code> of the push-mode document

@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../recipes/notifications/" class="md-nav__link">
         
   
@@ -1340,6 +1368,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#can-ci-check-recipes-without-access-to-the-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can CI check recipes without access to the servers?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-is-this-different-from-ansible" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1953,6 +1992,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#can-ci-check-recipes-without-access-to-the-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can CI check recipes without access to the servers?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-is-this-different-from-ansible" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2109,6 +2159,11 @@ Linux or macOS. Windows is not supported, as a target or otherwise.</p>
 <p>Yes: <code>facts[:memory_mb]</code>, <code>facts[:cpus]</code>, the machine's addresses and more,
 read on the machine when the recipe asks. <code>sadame facts -g web</code> shows them
 for each host. See <a href="../recipes/facts/">Facts</a>.</p>
+<h3 id="can-ci-check-recipes-without-access-to-the-servers">Can CI check recipes without access to the servers?<a class="headerlink" href="#can-ci-check-recipes-without-access-to-the-servers" title="Permanent link">&para;</a></h3>
+<p>Yes: <code>sadame validate site.rb -g all</code> evaluates the recipe for every host in
+the inventory, renders its templates and connects to nothing. It finds
+typos and template errors in pull requests that cannot read SSH secrets.
+See <a href="../reference/cli/#validate">Command line</a>.</p>
 <h3 id="how-is-this-different-from-ansible">How is this different from Ansible?<a class="headerlink" href="#how-is-this-different-from-ansible" title="Permanent link">&para;</a></h3>
 <p>Recipes are Ruby rather than YAML, targets need no Python, <code>plan</code> shows
 every change as a diff, and <code>drift</code> gives CI a yes-or-no answer. Ansible

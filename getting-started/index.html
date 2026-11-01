@@ -488,6 +488,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#your-own-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your own project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#common-mistakes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -727,6 +738,34 @@
     
   
     Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
   
 
     
@@ -1907,6 +1946,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#your-own-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your own project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#common-mistakes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1975,7 +2025,7 @@ resource:</p>
 <p><code>sadame plan</code> reads the current state of everything the recipe declares and
 prints what <code>apply</code> would change. It changes nothing.</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan examples/01-hello
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + file[/tmp/sadame-hello.txt]
     state: absent -&gt; present
@@ -1992,7 +2042,7 @@ sadame looks for <code>./recipe.rb</code>.</p>
 <p><code>sadame apply</code> makes the same comparison, resource by resource, and changes
 only what differs:</p>
 <div class="highlight"><pre><span></span><code>$ sadame apply examples/01-hello
-sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    file[/tmp/sadame-hello.txt]
            state: absent -&gt; present
@@ -2014,7 +2064,7 @@ Finished in 0.09s.
 means here: once the machine matches the recipe, running it again changes
 nothing.</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan examples/01-hello
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 </code></pre></div>
@@ -2023,7 +2073,7 @@ Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 <div class="highlight"><pre><span></span><code>$ echo 'Hello from someone else' &gt; /tmp/sadame-hello.txt
 
 $ sadame plan examples/01-hello
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/tmp/sadame-hello.txt]
     --- /tmp/sadame-hello.txt
@@ -2085,7 +2135,7 @@ resources are counted but not listed.</p>
 whether the machine still matches the recipe: <code>0</code> when it does, <code>1</code> when it
 has drifted. That makes it the command for scripts, cron jobs and CI:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift examples/01-hello
-sadame 0.3.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/tmp/sadame-hello.txt]
     --- /tmp/sadame-hello.txt
@@ -2108,7 +2158,7 @@ is described in the <a href="../reference/json-output/">JSON output reference</a
 <div class="highlight"><pre><span></span><code>$ sadame plan examples/01-hello --json
 {
   "format_version": 1,
-  "sadame_version": "0.3.0",
+  "sadame_version": "0.4.0",
   "command": "plan",
   "host": "local",
   "platform": {
@@ -2116,6 +2166,8 @@ is described in the <a href="../reference/json-output/">JSON output reference</a
     "family": "debian",
     "package_manager": "apt"
   },
+  "tags": [],
+  "skip_tags": [],
   "resources": [
     {
       "id": "file[/tmp/sadame-hello.txt]",
@@ -2179,6 +2231,30 @@ is described in the <a href="../reference/json-output/">JSON output reference</a
 </tr>
 </tbody>
 </table>
+<h2 id="your-own-project">Your own project<a class="headerlink" href="#your-own-project" title="Permanent link">&para;</a></h2>
+<p><code>sadame init</code> writes the files a project starts from: a recipe with one
+resource, <code>vars.rb</code>, an inventory with examples to uncomment, and a
+template. <code>sadame validate</code> checks the recipe without touching a machine:</p>
+<div class="highlight"><pre><span></span><code>$ sadame init infra
+created infra/recipe.rb
+created infra/vars.rb
+created infra/hosts.rb
+created infra/templates/motd.erb
+
+Next:
+  sadame validate infra        check the recipe without connecting to anything
+  sudo sadame plan infra       see what it would change on this machine
+  sadame plan infra -g all     on your servers, once infra/hosts.rb lists them
+
+$ sadame validate infra
+sadame 0.4.0 validate infra/recipe.rb, as on Debian GNU/Linux 12 (bookworm)
+
+  local  ok     1 resource
+
+validate on 1 host: 1 ok.
+</code></pre></div>
+<p>Add <code>--ci github</code> or <code>--ci gitlab</code> to also get a daily
+<a href="../guides/drift-in-ci/">drift check</a> for your CI.</p>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Running without root.</strong> Most real recipes install packages or write

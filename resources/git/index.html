@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -2019,7 +2047,7 @@ server's host key in their <code>~/.ssh/known_hosts</code>.</p>
 </code></pre></div>
 <h3 id="a-tagged-release-cloned-by-a-deploy-user">A tagged release, cloned by a deploy user<a class="headerlink" href="#a-tagged-release-cloned-by-a-deploy-user" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/git
-sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[git]
            state: absent -&gt; installed
@@ -2045,10 +2073,10 @@ Summary
   skipped      0
   notified     0
 
-Finished in 51.19s.
+Finished in 37.68s.
 
 $ sudo sadame plan examples/resources/git
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 4 unchanged.
 

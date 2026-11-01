@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1454,6 +1482,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1898,6 +1937,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1973,9 +2023,10 @@
 
 
 <h1 id="command-line">Command line<a class="headerlink" href="#command-line" title="Permanent link">&para;</a></h1>
-<p><code>sadame</code> has five commands: <code>plan</code>, <code>apply</code> and <code>drift</code> run a recipe,
-<code>hosts</code> shows which machines a selection reaches, and <code>facts</code> shows what
-recipes see on them. Each takes the same
+<p><code>sadame</code> has eight commands: <code>plan</code>, <code>apply</code> and <code>drift</code> run a recipe,
+<code>validate</code> checks one without any machine, <code>hosts</code> shows which machines a
+selection reaches and <code>facts</code> what recipes see on them, <code>init</code> starts a
+project and <code>report</code> turns JSON reports into Markdown or JUnit. Each takes the same
 target and output options, so a command line that plans a change also
 applies it after replacing <code>plan</code> with <code>apply</code>. This page lists every
 command, option, environment variable and file; the
@@ -1987,13 +2038,20 @@ sadame<span class="w"> </span>apply<span class="w"> </span>examples/01-hello<spa
 <p><code>sadame --help</code> prints the same reference in short:</p>
 <div class="highlight"><pre><span></span><code>$ sadame --help
 Usage: sadame COMMAND [RECIPE] [options]
+       sadame init [DIRECTORY] [--ci github|gitlab]
+       sadame report FILE [--format markdown|junit]
 
 Commands:
+  init     Start a project: recipe.rb, vars.rb, hosts.rb, a template, and
+           with --ci a daily drift check for GitHub Actions or GitLab CI.
   plan     Show what apply would change, as a diff. Changes nothing.
   apply    Make the hosts match the recipe.
   drift    Like plan, but exit 1 when a host differs from the recipe.
+  validate Check the recipe for every selected host without connecting.
   hosts    Show the selected hosts with their connection options and vars.
   facts    Show the facts recipes see on each host: CPUs, memory, addresses.
+  report   Turn the --json output of plan, apply or drift into Markdown
+           (for a CI summary page) or JUnit XML (for test reports).
 
 RECIPE is a recipe file or a directory containing recipe.rb
 (default: ./recipe.rb). vars.rb and hosts.rb next to it are loaded if
@@ -2011,9 +2069,15 @@ Targets:
                                       batch after another; stop when a batch fails
 
 Options:
+  --platform NAME     validate as on debian, ubuntu, rocky, alpine or arch
+                      (default: debian)
+  --tags T,...        Only resources with one of these tags (plan, apply, drift)
+  --skip-tags T,...   Leave out resources with one of these tags
   --var KEY=VALUE     Set vars[:KEY]; repeatable, overrides everything else
   --vars-file PATH    Load more vars from a Ruby file (local runs)
   --json              Print a JSON report instead of text
+  --format FORMAT     report: markdown (default) or junit
+  --ci SYSTEM         init: also write a drift check for github or gitlab
   --color             Always use colors
   --no-color          Never use colors (also: NO_COLOR environment variable)
   --host-name NAME    host_name in recipes and reports for local runs (default: local)
@@ -2057,6 +2121,11 @@ Exit status:
 <td>Same comparison as <code>plan</code>; exits <code>1</code> when anything differs. For scripts and CI.</td>
 </tr>
 <tr>
+<td><code>validate</code></td>
+<td>no</td>
+<td>Evaluates the recipe for each selected host, with its vars, against a stand-in machine, and renders the templates: finds what would make <code>plan</code> fail, without connecting to anything. Exits <code>2</code> when a host's recipe has an error.</td>
+</tr>
+<tr>
 <td><code>hosts</code></td>
 <td>no</td>
 <td>Prints the selected hosts, their connection options and vars, and where each var came from. Connects to nothing.</td>
@@ -2065,6 +2134,16 @@ Exit status:
 <td><code>facts</code></td>
 <td>no</td>
 <td>Prints the <a href="../../recipes/facts/">facts</a> recipes see: of this machine, or with <code>-h</code>, <code>-g</code> or <code>--limit</code>, of each selected host over SSH. Runs no recipe.</td>
+</tr>
+<tr>
+<td><code>init</code></td>
+<td>no</td>
+<td>Writes <code>recipe.rb</code>, <code>vars.rb</code>, <code>hosts.rb</code> and <code>templates/motd.erb</code> into a directory (<code>.</code> by default); with <code>--ci</code>, also a daily drift check. Writes nothing if one of its files exists.</td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td>no</td>
+<td>Reads the <code>--json</code> output of <code>plan</code>, <code>apply</code> or <code>drift</code> from a file and prints it as Markdown or JUnit XML; see <a href="../../guides/drift-in-ci/#reading-the-report">Drift in CI</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -2161,6 +2240,26 @@ and the recipe there first (see <a href="../../guides/remote-hosts/">Remote host
 </thead>
 <tbody>
 <tr>
+<td><code>--tags T,...</code></td>
+<td><code>plan</code>, <code>apply</code>, <code>drift</code>: only resources with one of these <a href="../../recipes/tags/">tags</a>.</td>
+</tr>
+<tr>
+<td><code>--skip-tags T,...</code></td>
+<td><code>plan</code>, <code>apply</code>, <code>drift</code>: leave out resources with one of these tags.</td>
+</tr>
+<tr>
+<td><code>--platform NAME</code></td>
+<td><code>validate</code>: evaluate as on <code>debian</code> (the default), <code>ubuntu</code>, <code>rocky</code>, <code>alpine</code> or <code>arch</code>.</td>
+</tr>
+<tr>
+<td><code>--format FORMAT</code></td>
+<td><code>report</code>: <code>markdown</code> (the default) or <code>junit</code>.</td>
+</tr>
+<tr>
+<td><code>--ci SYSTEM</code></td>
+<td><code>init</code>: also write a daily drift check for <code>github</code> (<code>.github/workflows/sadame-drift.yml</code>) or <code>gitlab</code> (<code>.gitlab/sadame-drift.yml</code>), in the current directory.</td>
+</tr>
+<tr>
 <td><code>--var KEY=VALUE</code></td>
 <td>Sets <code>vars[:KEY]</code>. Repeatable. Wins over every other source of vars. Whole numbers become Integers, <code>true</code> and <code>false</code> booleans; everything else stays a String.</td>
 </tr>
@@ -2199,8 +2298,39 @@ and the recipe there first (see <a href="../../guides/remote-hosts/">Remote host
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code>$ sadame --version
-sadame 0.3.0
+sadame 0.4.0
 </code></pre></div>
+<h2 id="validate">validate<a class="headerlink" href="#validate" title="Permanent link">&para;</a></h2>
+<p><code>validate</code> evaluates the recipe the way <code>plan</code> does, but against a machine
+that is not there: the platform given with <code>--platform</code>, made-up
+<a href="../../recipes/facts/">facts</a> (2 CPUs, 2048 MB, <code>192.0.2.10</code>), and a shell
+that refuses to run anything. It finds Ruby errors, misspelled resources and
+options, notifications to resources that are not declared, missing
+templates and files, and template errors, for every selected host with its
+own name, groups and vars:</p>
+<div class="highlight"><pre><span></span><code>$ sadame validate examples/08-multi-role-inventory/site.rb -g all --platform ubuntu
+sadame 0.4.0 validate examples/08-multi-role-inventory/site.rb, as on Ubuntu 24.04 LTS
+
+  web1.example.com  ok     6 resources
+  web2.example.com  ok     6 resources
+  db1.example.com   ok     6 resources
+
+validate on 3 hosts: 3 ok.
+</code></pre></div>
+<p>An error names the file and line:</p>
+<div class="highlight"><pre><span></span><code>$ sadame validate
+sadame 0.4.0 validate recipe.rb, as on Debian GNU/Linux 12 (bookworm)
+
+  local  error  templates/app.conf.erb:3: undefined method 'port' for Sadame::Template::Scope
+
+validate on 1 host: 0 ok, 1 error.
+
+$ echo $?
+2
+</code></pre></div>
+<p>What it cannot find is what depends on the machine: a package name that
+does not exist there, a service that is not installed, a file a <code>line</code>
+resource expects. <code>plan</code> finds those.</p>
 <h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

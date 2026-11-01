@@ -716,6 +716,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -1931,7 +1959,7 @@ files, and how templates work.</p>
 </code></pre></div>
 <p>Planned on a fresh Debian 12 machine:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[curl]
     state: absent -&gt; installed
@@ -1972,7 +2000,7 @@ Plan: 3 to create, 1 to update, 0 to remove, 0 to run, 0 unchanged.
   whole run, with exit status 2, before anything is changed:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan
-sadame: recipe.rb:2: file[/etc/motd]: unknown option :contents (valid options: content, group, locals, mode, notifies, owner, sensitive, source, state, subscribes, template, verify)
+sadame: recipe.rb:2: file[/etc/motd]: unknown option :contents (valid options: content, group, locals, mode, notifies, owner, sensitive, source, state, subscribes, tags, template, verify)
 
 $ echo $?
 2
@@ -2017,7 +2045,7 @@ $ echo $?
 </tr>
 <tr>
 <td><code>include_recipe "path"</code></td>
-<td>evaluate another recipe file</td>
+<td>evaluate another recipe file; <code>tags:</code> tags everything it declares (see <a href="../tags/">Tags</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -2078,7 +2106,7 @@ always become symbols.</p>
 </table>
 <p>Adding a maintenance window for one run changes the template output:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics --var maintenance='Sundays 02:00-03:00 UTC'
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[curl]
     state: absent -&gt; installed
@@ -2164,7 +2192,7 @@ to the <code>file</code> resource's <code>locals:</code> option, and <code>facts
 <p>After <code>apply</code>, changing a var shows exactly which lines of the rendered file
 change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics --var contact=platform@example.com
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/motd]
     --- /etc/motd
@@ -2180,7 +2208,7 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 3 unchanged.
 <p>An error in a template fails that resource and names the template and
 line. Here <code>templates/app.conf.erb</code> contains <code>port = &lt;%= port %&gt;</code>:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan
-sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 x file[/etc/app.conf]
     error: templates/app.conf.erb:3: undefined method 'port' for Sadame::Template::Scope

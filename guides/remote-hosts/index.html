@@ -590,6 +590,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -2063,14 +2091,14 @@ fails.</p>
 sadame<span class="w"> </span>plan<span class="w"> </span>site.rb<span class="w"> </span>-h<span class="w"> </span>deploy@db1.example.com:2222
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -h deploy@db1.example.com:2222
-[db1.example.com] sadame 0.3.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] sadame 0.4.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
 [db1.example.com]
 [db1.example.com] Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 6 unchanged.
 
 Hosts
   db1.example.com  ok
 
-plan on 1 host: 1 ok. Finished in 0.21s.
+plan on 1 host: 1 ok. Finished in 0.22s.
 </code></pre></div>
 <p>The targets need a POSIX shell, <code>tar</code> with gzip support, <code>sha256sum</code> (or
 <code>shasum</code>), and Linux or macOS on x86_64 or ARM64. The machine running
@@ -2237,9 +2265,9 @@ target). It looks in this order:</p>
 Lines from different hosts interleave, each with its host's name in front,
 and a table at the end shows each host's result:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift site.rb --limit 'web*'
-[web2.example.com] sadame 0.3.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
-[web1.example.com] sadame 0.3.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.4.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
+[web2.example.com] sadame 0.4.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
 [web2.example.com] ~ file[/etc/demo-app/web.conf]
 [web2.example.com]     --- /etc/demo-app/web.conf
@@ -2257,7 +2285,7 @@ Hosts
   web1.example.com  ok
   web2.example.com  drift
 
-drift on 2 hosts: 1 ok, 1 drift. Finished in 0.22s.
+drift on 2 hosts: 1 ok, 1 drift. Finished in 0.24s.
 
 $ echo $?
 1
@@ -2306,7 +2334,7 @@ $ echo $?
 <p>The exit status of the whole run is the highest of its hosts. A host that
 cannot be reached does not stop the others:</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -g db -h deploy@db2.example.com
-[db1.example.com] sadame 0.3.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] sadame 0.4.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
 [db1.example.com]
 [db1.example.com] Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 6 unchanged.
 
@@ -2314,7 +2342,7 @@ Hosts
   db1.example.com  ok
   db2.example.com  unreachable  connect failed: ssh: Could not resolve hostname db2.example.com: Name or service not known
 
-plan on 2 hosts: 1 ok, 1 unreachable. Finished in 0.21s.
+plan on 2 hosts: 1 ok, 1 unreachable. Finished in 0.23s.
 
 $ echo $?
 2
@@ -2322,10 +2350,10 @@ $ echo $?
 <details class="example">
 <summary>Full output of <code>sadame apply site.rb -g all</code> on three fresh servers</summary>
 <div class="highlight"><pre><span></span><code>$ sadame apply site.rb -g all
-[db1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/ddb29d93cbdcb51d6948ec5edbe5b185e97db7595d559e7e5a5b687bf0353276/
-[web1.example.com] sadame 0.3.0 apply on web1.example.com (Debian GNU/Linux 12 (bookworm))
-[web2.example.com] sadame 0.3.0 apply on web2.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/b3ee017faf9f137c63a3b6ea1698fea0fe70bb0f9b7223fbf2bdf9e2c3356f20/
+[web2.example.com] sadame 0.4.0 apply on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
+[web1.example.com] sadame 0.4.0 apply on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
 [web2.example.com] changed    file[/etc/motd]
 [web2.example.com]            --- /etc/motd
@@ -2355,7 +2383,7 @@ $ echo $?
 [web1.example.com]            +web1.example.com (production)
 [web1.example.com]            +Groups: web, all
 [web1.example.com]            +Managed by sadame. Local changes will be overwritten.
-[db1.example.com] sadame 0.3.0 apply on db1.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] sadame 0.4.0 apply on db1.example.com (Debian GNU/Linux 12 (bookworm))
 [db1.example.com]
 [db1.example.com] changed    file[/etc/motd]
 [db1.example.com]            --- /etc/motd
@@ -2371,8 +2399,6 @@ $ echo $?
 [db1.example.com]            +db1.example.com (production)
 [db1.example.com]            +Groups: db, all
 [db1.example.com]            +Managed by sadame. Local changes will be overwritten.
-[db1.example.com] changed    package[sqlite3]
-[db1.example.com]            state: absent -&gt; installed
 [web2.example.com] changed    package[nginx]
 [web2.example.com]            state: absent -&gt; installed
 [web2.example.com] changed    directory[/etc/demo-app]
@@ -2417,7 +2443,9 @@ $ echo $?
 [web2.example.com]   skipped      0
 [web2.example.com]   notified     1  service[nginx]: reload
 [web2.example.com]
-[web2.example.com] Finished in 7.23s.
+[web2.example.com] Finished in 5.37s.
+[db1.example.com] changed    package[sqlite3]
+[db1.example.com]            state: absent -&gt; installed
 [db1.example.com] changed    package[cron]
 [db1.example.com]            state: absent -&gt; installed
 [db1.example.com] changed    user[demo-db]
@@ -2449,7 +2477,7 @@ $ echo $?
 [db1.example.com]   skipped      0
 [db1.example.com]   notified     0
 [db1.example.com]
-[db1.example.com] Finished in 10.37s.
+[db1.example.com] Finished in 8.92s.
 [web1.example.com] changed    package[nginx]
 [web1.example.com]            state: absent -&gt; installed
 [web1.example.com] changed    directory[/etc/demo-app]
@@ -2494,14 +2522,14 @@ $ echo $?
 [web1.example.com]   skipped      0
 [web1.example.com]   notified     1  service[nginx]: reload
 [web1.example.com]
-[web1.example.com] Finished in 11.43s.
+[web1.example.com] Finished in 15.41s.
 
 Hosts
   web1.example.com  ok
   web2.example.com  ok
   db1.example.com   ok
 
-apply on 3 hosts: 3 ok. Finished in 11.64s.
+apply on 3 hosts: 3 ok. Finished in 15.64s.
 </code></pre></div>
 </details>
 <p>With <code>--json</code>, the run prints one document with each host's result and its
@@ -2526,7 +2554,7 @@ others. <code>drift</code> results do not stop the run.</p>
 fails and db1, in the third batch, is never touched:</p>
 <div class="highlight"><pre><span></span><code>$ sadame apply site.rb -g all --serial 1
 Batch 1 of 3: web1.example.com
-[web1.example.com] sadame 0.3.0 apply on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.4.0 apply on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
 [web1.example.com] unchanged  file[/etc/motd]
 [web1.example.com] unchanged  package[nginx]
@@ -2545,7 +2573,7 @@ Batch 1 of 3: web1.example.com
 [web1.example.com] Finished in 0.01s.
 
 Batch 2 of 3: web2.example.com
-[web2.example.com] sadame 0.3.0 apply on web2.example.com (Debian GNU/Linux 12 (bookworm))
+[web2.example.com] sadame 0.4.0 apply on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
 [web2.example.com] unchanged  file[/etc/motd]
 [web2.example.com] unchanged  package[nginx]
@@ -2573,7 +2601,7 @@ Hosts
   web2.example.com  failed
   db1.example.com   skipped      not run: batch 2 failed
 
-apply on 3 hosts: 1 ok, 1 failed, 1 skipped. Finished in 0.46s.
+apply on 3 hosts: 1 ok, 1 failed, 1 skipped. Finished in 0.44s.
 
 $ echo $?
 1
@@ -2651,12 +2679,12 @@ plan on 1 host: 1 unreachable. Finished in 0.01s.
 </code></pre></div>
 <p>And a user whose sudo asks for a password:</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -h ops@web1.example.com --sudo
-[web1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/ddb29d93cbdcb51d6948ec5edbe5b185e97db7595d559e7e5a5b687bf0353276/
+[web1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/b3ee017faf9f137c63a3b6ea1698fea0fe70bb0f9b7223fbf2bdf9e2c3356f20/
 
 Hosts
   web1.example.com  error        sudo failed: sudo: a password is required
 
-plan on 1 host: 1 error. Finished in 0.22s.
+plan on 1 host: 1 error. Finished in 0.23s.
 </code></pre></div>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
 <ul>
