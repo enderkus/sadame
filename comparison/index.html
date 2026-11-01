@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1752,6 +1864,15 @@ add-ons can do more.</p>
 <td>scheduled runs correct drift and mark it as a corrective change in their reports</td>
 </tr>
 <tr>
+<td><strong>Rolling changes</strong></td>
+<td><code>--serial N</code> or <code>N%</code>: batches, stopping after a failed one</td>
+<td><code>serial:</code>, with <code>max_fail_percentage</code></td>
+<td>no; one host per <code>itamae ssh</code> run</td>
+<td>no</td>
+<td>no built-in; each client runs on its own schedule, optionally delayed by a random <code>splay</code></td>
+<td>no built-in; agents run on their own schedules, optionally with <code>splay</code></td>
+</tr>
+<tr>
 <td><strong>JSON output</strong></td>
 <td><code>--json</code>: one document per run, per host and resource</td>
 <td>callback plugins, such as <code>ansible.posix.json</code></td>
@@ -1780,7 +1901,7 @@ add-ons can do more.</p>
 </tr>
 <tr>
 <td><strong>Maturity</strong></td>
-<td>0.1.0, November 2026: six resource types, one maintainer</td>
+<td>0.2.0, November 2026: ten resource types, one maintainer</td>
 <td>since 2012, maintained by Red Hat, thousands of modules</td>
 <td>since 2013, community maintained</td>
 <td>since 2016, community maintained</td>
@@ -1791,11 +1912,11 @@ add-ons can do more.</p>
 </table>
 <h2 id="where-sadame-falls-short">Where Sadame falls short<a class="headerlink" href="#where-sadame-falls-short" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Six resource types.</strong> <code>package</code>, <code>file</code>, <code>directory</code>, <code>service</code>,
-  <code>exec</code> and <code>user</code>. No <code>git</code>, <code>mount</code>, <code>cron</code>, <code>group</code>, <code>link</code> or
+<li><strong>Ten resource types.</strong> <code>package</code>, <code>file</code>, <code>line</code>, <code>directory</code>, <code>link</code>,
+  <code>service</code>, <code>exec</code>, <code>user</code>, <code>group</code> and <code>git</code>. No <code>mount</code>, <code>cron</code> or
   firewall resources yet; a guarded <code>exec</code> stands in for them.</li>
 <li><strong>Linux targets only.</strong> No Windows, macOS or BSD targets, and no network
-  devices. <code>service</code> needs systemd, so it does not work on Alpine.</li>
+  devices.</li>
 <li><strong>No secrets management.</strong> Nothing like Ansible Vault or Chef's
   encrypted data bags; read secrets from the environment in <code>vars.rb</code>.</li>
 <li><strong>No facts beyond the basics.</strong> Recipes see <code>platform</code> (from
@@ -1804,7 +1925,7 @@ add-ons can do more.</p>
   gather.</li>
 <li><strong>No ecosystem.</strong> No Galaxy, Supermarket or Forge; recipes are shared
   as files.</li>
-<li><strong>Young.</strong> One release, tested on five distributions and in CI, with
+<li><strong>Young.</strong> Two releases, tested on five distributions and in CI, with
   none of the years of production use the others have.</li>
 </ul>
 <h2 id="where-it-fits">Where it fits<a class="headerlink" href="#where-it-fits" title="Permanent link">&para;</a></h2>

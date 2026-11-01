@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://enderkus.github.io/sadame/resources/service/">
       
       
-        <link rel="prev" href="../directory/">
+        <link rel="prev" href="../link/">
       
       
         <link rel="next" href="../exec/">
@@ -707,6 +707,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../directory/" class="md-nav__link">
         
   
@@ -715,6 +743,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -810,6 +866,17 @@
     <span class="md-ellipsis">
       
         Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenRC
       
     </span>
   </a>
@@ -951,6 +1018,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1698,6 +1821,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#openrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenRC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#actions-for-notifications" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1801,11 +1935,12 @@
 
 
 <h1 id="service">service<a class="headerlink" href="#service" title="Permanent link">&para;</a></h1>
-<p><code>service</code> manages a systemd unit: whether it starts at boot (<code>enable</code>) and
-whether it is running now (<code>state</code>). It reads the current state with
-<code>systemctl is-enabled</code> and <code>systemctl is-active</code> and only calls <code>systemctl</code>
-to change what differs. Other resources can ask a service to reload or
-restart when they change, through <code>notifies:</code>.</p>
+<p><code>service</code> manages a service: whether it starts at boot (<code>enable</code>) and
+whether it is running now (<code>state</code>). It works with systemd, and with OpenRC
+on Alpine. It reads the current state with <code>systemctl is-enabled</code> and
+<code>systemctl is-active</code> (or <code>rc-update show</code> and <code>rc-service NAME status</code>)
+and only changes what differs. Other resources can ask a service to reload
+or restart when they change, through <code>notifies:</code>.</p>
 <h2 id="minimal-example">Minimal example<a class="headerlink" href="#minimal-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><span class="filename">examples/resources/service/recipe.rb</span><pre><span></span><code><span class="c1"># On Arch, installing nginx does not enable or start it; the service</span>
 <span class="c1"># resource does. Debian and Ubuntu start services on install, so there the</span>
@@ -1840,7 +1975,7 @@ restart when they change, through <code>notifies:</code>.</p>
 <td><code>user</code></td>
 <td>String</td>
 <td>none</td>
-<td>Manage the unit in this user's systemd instance (<code>systemctl --user -M USER@</code>), such as a unit in <code>~/.config/systemd/user/</code>. The user must be logged in or have lingering enabled (<code>loginctl enable-linger USER</code>).</td>
+<td>Manage the unit in this user's systemd instance (<code>systemctl --user -M USER@</code>), such as a unit in <code>~/.config/systemd/user/</code>. The user must be logged in or have lingering enabled (<code>loginctl enable-linger USER</code>). systemd only.</td>
 </tr>
 <tr>
 <td><code>notifies</code></td>
@@ -1858,39 +1993,115 @@ restart when they change, through <code>notifies:</code>.</p>
 </table>
 <p>A service with neither option manages nothing by itself; it is still a valid
 target for notifications.</p>
+<h2 id="openrc">OpenRC<a class="headerlink" href="#openrc" title="Permanent link">&para;</a></h2>
+<p>On a host that runs OpenRC instead of systemd, as Alpine does, the same
+recipe works with OpenRC's commands. sadame checks for
+<code>/run/systemd/system</code> first, then for <code>/run/openrc/softlevel</code>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>systemd</th>
+<th>OpenRC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enabled means</td>
+<td><code>systemctl is-enabled</code> prints <code>enabled</code></td>
+<td>the service is in a runlevel (<code>rc-update show</code>)</td>
+</tr>
+<tr>
+<td><code>enable: true</code></td>
+<td><code>systemctl enable NAME</code></td>
+<td><code>rc-update add NAME default</code></td>
+</tr>
+<tr>
+<td><code>enable: false</code></td>
+<td><code>systemctl disable NAME</code></td>
+<td><code>rc-update del NAME RUNLEVEL</code> for each runlevel it is in</td>
+</tr>
+<tr>
+<td>Running means</td>
+<td><code>systemctl is-active</code> prints <code>active</code></td>
+<td><code>rc-service NAME status</code> exits 0</td>
+</tr>
+<tr>
+<td><code>state: :running</code></td>
+<td><code>systemctl start NAME</code></td>
+<td><code>rc-service NAME start</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">New in 0.2.0</p>
+<p>sadame 0.1.0 supports systemd only.</p>
+</div>
+<div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/service
+sadame 0.2.0 apply on local (Alpine Linux v3.20)
+
+changed    package[nginx]
+           state: absent -&gt; installed
+changed    service[nginx]
+           enabled: false -&gt; true
+           state: stopped -&gt; running
+
+Summary
+  changed      2  package[nginx]
+                  service[nginx]
+  unchanged    0
+  failed       0
+  skipped      0
+  notified     0
+
+Finished in 0.99s.
+
+$ rc-update show default
+                nginx | default
+
+$ rc-service nginx status
+ * status: started
+</code></pre></div>
 <h2 id="actions-for-notifications">Actions for notifications<a class="headerlink" href="#actions-for-notifications" title="Permanent link">&para;</a></h2>
 <p>Other resources can trigger these with <code>notifies: [:action, "service[name]"]</code>:</p>
 <table>
 <thead>
 <tr>
 <th>Action</th>
-<th>Runs</th>
+<th>Runs with systemd</th>
+<th>Runs with OpenRC</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>:start</code></td>
 <td><code>systemctl start NAME</code></td>
+<td><code>rc-service NAME start</code></td>
 </tr>
 <tr>
 <td><code>:stop</code></td>
 <td><code>systemctl stop NAME</code></td>
+<td><code>rc-service NAME stop</code></td>
 </tr>
 <tr>
 <td><code>:restart</code></td>
 <td><code>systemctl restart NAME</code></td>
+<td><code>rc-service NAME restart</code></td>
 </tr>
 <tr>
 <td><code>:reload</code></td>
 <td><code>systemctl reload NAME</code></td>
+<td><code>rc-service NAME reload</code></td>
 </tr>
 <tr>
 <td><code>:enable</code></td>
 <td><code>systemctl enable NAME</code></td>
+<td><code>rc-update add NAME default</code></td>
 </tr>
 <tr>
 <td><code>:disable</code></td>
 <td><code>systemctl disable NAME</code></td>
+<td><code>rc-update del NAME RUNLEVEL</code></td>
 </tr>
 </tbody>
 </table>
@@ -1910,7 +2121,7 @@ started. Each resource reads its current state right before it runs, so by
 the time <code>service[nginx]</code> is applied, only the running state is left to
 change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/service
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[nginx]
     state: absent -&gt; installed
@@ -1922,7 +2133,7 @@ sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 1 to create, 1 to update, 0 to remove, 0 to run, 0 unchanged.
 
 $ sudo sadame apply examples/resources/service
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[nginx]
            state: absent -&gt; installed
@@ -1937,7 +2148,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 5.94s.
+Finished in 5.23s.
 </code></pre></div>
 <h3 id="someone-stopped-and-disabled-it">Someone stopped and disabled it<a class="headerlink" href="#someone-stopped-and-disabled-it" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo systemctl stop nginx
@@ -1945,7 +2156,7 @@ Finished in 5.94s.
 $ sudo systemctl disable --quiet nginx
 
 $ sudo sadame plan examples/resources/service
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ service[nginx]
     enabled: false -&gt; true
@@ -1954,7 +2165,7 @@ sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 1 unchanged.
 
 $ sudo sadame apply examples/resources/service
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  package[nginx]
 changed    service[nginx]
@@ -1968,7 +2179,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.11s.
+Finished in 0.08s.
 </code></pre></div>
 <h3 id="reloading-after-a-configuration-change">Reloading after a configuration change<a class="headerlink" href="#reloading-after-a-configuration-change" title="Permanent link">&para;</a></h3>
 <div class="highlight"><span class="filename">examples/resources/service/reload_on_change.rb</span><pre><span></span><code><span class="c1"># Reload nginx when its configuration changes. The reload runs once, at the</span>
@@ -1983,7 +2194,7 @@ Finished in 0.11s.
 <span class="n">service</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span><span class="w"> </span><span class="ss">enable</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="p">,</span><span class="w"> </span><span class="ss">state</span><span class="p">:</span><span class="w"> </span><span class="ss">:running</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/service/reload_on_change.rb
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[nginx]
            state: absent -&gt; installed
@@ -2010,14 +2221,14 @@ Summary
   skipped      0
   notified     1  service[nginx]: reload
 
-Finished in 22.65s.
+Finished in 13.04s.
 </code></pre></div>
 <p>On the next run nothing changes, so nothing is reloaded.</p>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>No systemd.</strong> The resource needs a running systemd (it checks for
-  <code>/run/systemd/system</code>). In containers without systemd, and on Alpine with
-  OpenRC, it fails with "systemd is not running on this host".</li>
+<li><strong>No service manager.</strong> The resource needs systemd or OpenRC running.
+  In most containers neither runs, and it fails with "no service manager
+  is running on this host".</li>
 <li><strong>Declaring the service before its package.</strong> On a fresh machine the unit
   does not exist yet, so plan shows it as disabled and stopped, and <code>apply</code>
   fails if the package comes later in the recipe. Put <code>package</code> first.</li>
@@ -2027,7 +2238,11 @@ Finished in 22.65s.
 <li><strong>Expecting a reload when only the service changed.</strong> <code>reload</code> and
   <code>restart</code> happen only through notifications from other resources.</li>
 <li><strong>Reloading a service that cannot reload.</strong> <code>systemctl reload</code> fails for
-  units without <code>ExecReload=</code>. Notify <code>:restart</code> for those.</li>
+  units without <code>ExecReload=</code>, and <code>rc-service NAME reload</code> for init
+  scripts without a reload command. Notify <code>:restart</code> for those.</li>
+<li><strong>Different names on different systems.</strong> The SSH server is <code>ssh</code> on
+  Debian and Ubuntu and <code>sshd</code> elsewhere; cron is <code>cron</code>, <code>crond</code> or
+  <code>cronie</code>. Pick the name from <code>platform.family</code>.</li>
 </ul>
 <h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2069,7 +2284,7 @@ Finished in 22.65s.
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../directory/" class="md-footer__link md-footer__link--prev" aria-label="Previous: directory">
+          <a href="../link/" class="md-footer__link md-footer__link--prev" aria-label="Previous: link">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2079,7 +2294,7 @@ Finished in 22.65s.
                 Previous
               </span>
               <div class="md-ellipsis">
-                directory
+                link
               </div>
             </div>
           </a>

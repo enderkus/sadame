@@ -870,6 +870,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -878,6 +906,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -962,6 +1018,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1925,7 +2037,7 @@ configuration file and keeps nginx running:</p>
 </code></pre></div>
 <h3 id="apply">Apply<a class="headerlink" href="#apply" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/10-drift-demo
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[nginx]
            state: absent -&gt; installed
@@ -1962,11 +2074,11 @@ Summary
   skipped      0
   notified     0
 
-Finished in 41.13s.
+Finished in 5.24s.
 </code></pre></div>
 <h3 id="drift-right-after-apply">Drift right after apply<a class="headerlink" href="#drift-right-after-apply" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame drift examples/10-drift-demo
-sadame 0.1.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 No drift: 5 resources match the recipe.
 
@@ -2001,7 +2113,7 @@ break-things: edited app.conf, changed its mode, stopped nginx
 <p>Three changes on two resources: the file's content and mode, and the
 service state. The exit status is <code>1</code>.</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame drift examples/10-drift-demo
-sadame 0.1.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/demo-app/app.conf]
     mode: 0644 -&gt; 0640
@@ -2024,7 +2136,7 @@ $ echo $?
 </code></pre></div>
 <h3 id="apply-puts-it-back">Apply puts it back<a class="headerlink" href="#apply-puts-it-back" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/10-drift-demo
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  package[nginx]
 unchanged  user[demo-app]
@@ -2050,10 +2162,10 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.02s.
+Finished in 0.01s.
 
 $ sudo sadame drift examples/10-drift-demo
-sadame 0.1.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 No drift: 5 resources match the recipe.
 

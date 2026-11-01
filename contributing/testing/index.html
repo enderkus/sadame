@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1854,10 +1966,9 @@ rake<span class="w"> </span>test:push<span class="w">                           
 <code>test/integration/docker/images/</code> built with <code>docker buildx</code>: Ubuntu 24.04,
 Debian 12, Rocky Linux 9, Alpine 3.20 and Arch Linux (<code>archlinux:latest</code> on
 amd64; the community image <code>menci/archlinuxarm</code> on arm64, where Arch has no
-official image). The containers boot systemd as PID 1 (privileged, with the
-host's cgroups), so <code>service</code> resources start and stop real units. Alpine
-uses OpenRC, not systemd, so the examples with <code>service</code> resources are
-skipped there, with that reason in the report. The binary under test is
+official image). The containers boot their service manager as PID 1
+(privileged, with the host's cgroups): systemd, and OpenRC on Alpine, so
+<code>service</code> resources start and stop real services. The binary under test is
 <code>dist/sadame-linux-ARCH</code>, mounted unmodified.</p>
 <p>For each example the test runs its setup (for example creating the user
 that example 12 manages), then for each argument list in the matrix:
@@ -1941,6 +2052,7 @@ rake<span class="w"> </span>build:linux-amd64
 rake<span class="w"> </span><span class="s2">"vm:reset[debian]"</span><span class="w">     </span><span class="c1"># revert the debian VM to its clean snapshot (virsh over SSH)</span>
 rake<span class="w"> </span><span class="s2">"vm:test[debian]"</span><span class="w">      </span><span class="c1"># reset, push every example that applies, check drift after each</span>
 rake<span class="w"> </span>vm:test:all<span class="w">            </span><span class="c1"># every VM in hosts.local.rb</span>
+<span class="nv">SADAME_VM_ONLY</span><span class="o">=</span>resources/git,05-postgres<span class="w"> </span>rake<span class="w"> </span><span class="s2">"vm:test[debian]"</span><span class="w">   </span><span class="c1"># only these examples</span>
 </code></pre></div>
 <p><code>vm:test</code> reverts the VM to its clean snapshot before each applicable
 example, as the Docker tests start each example in a fresh container, then

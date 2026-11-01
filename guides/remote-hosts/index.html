@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1061,6 +1173,34 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Many hosts at once">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fewer-at-a-time-forks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fewer at a time: --forks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-changes-serial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling changes: --serial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1799,6 +1939,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Many hosts at once">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fewer-at-a-time-forks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fewer at a time: --forks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-changes-serial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling changes: --serial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1867,7 +2035,7 @@ fails.</p>
 sadame<span class="w"> </span>plan<span class="w"> </span>site.rb<span class="w"> </span>-h<span class="w"> </span>deploy@db1.example.com:2222
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -h deploy@db1.example.com:2222
-[db1.example.com] sadame 0.1.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] sadame 0.2.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
 [db1.example.com]
 [db1.example.com] Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 6 unchanged.
 
@@ -2037,13 +2205,13 @@ target). It looks in this order:</p>
    <code>SHA256SUMS</code>; <code>$SADAME_DOWNLOAD_URL</code> points at a mirror instead.</li>
 </ol>
 <h2 id="many-hosts-at-once">Many hosts at once<a class="headerlink" href="#many-hosts-at-once" title="Permanent link">&para;</a></h2>
-<p>Every selected host runs at the same time, in its own process. Lines from
-different hosts interleave, each with its host's name in front, and a table
-at the end shows each host's result:</p>
+<p>By default every selected host runs at the same time, in its own process.
+Lines from different hosts interleave, each with its host's name in front,
+and a table at the end shows each host's result:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift site.rb --limit 'web*'
-[web1.example.com] sadame 0.1.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.2.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
-[web2.example.com] sadame 0.1.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
+[web2.example.com] sadame 0.2.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
 [web2.example.com] ~ file[/etc/demo-app/web.conf]
 [web2.example.com]     --- /etc/demo-app/web.conf
@@ -2061,7 +2229,7 @@ Hosts
   web1.example.com  ok
   web2.example.com  drift
 
-drift on 2 hosts: 1 ok, 1 drift. Finished in 0.22s.
+drift on 2 hosts: 1 ok, 1 drift. Finished in 0.23s.
 
 $ echo $?
 1
@@ -2100,12 +2268,17 @@ $ echo $?
 <td>ssh could not connect</td>
 <td>2</td>
 </tr>
+<tr>
+<td><code>skipped</code></td>
+<td>not run, because an earlier batch failed (<code>--serial</code>)</td>
+<td>none</td>
+</tr>
 </tbody>
 </table>
 <p>The exit status of the whole run is the highest of its hosts. A host that
 cannot be reached does not stop the others:</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -g db -h deploy@db2.example.com
-[db1.example.com] sadame 0.1.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] sadame 0.2.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
 [db1.example.com]
 [db1.example.com] Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 6 unchanged.
 
@@ -2113,7 +2286,7 @@ Hosts
   db1.example.com  ok
   db2.example.com  unreachable  connect failed: ssh: Could not resolve hostname db2.example.com: Name or service not known
 
-plan on 2 hosts: 1 ok, 1 unreachable. Finished in 0.20s.
+plan on 2 hosts: 1 ok, 1 unreachable. Finished in 0.22s.
 
 $ echo $?
 2
@@ -2121,25 +2294,11 @@ $ echo $?
 <details class="example">
 <summary>Full output of <code>sadame apply site.rb -g all</code> on three fresh servers</summary>
 <div class="highlight"><pre><span></span><code>$ sadame apply site.rb -g all
-[db1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/af0ca7fd9b4e138bec76af3a44f0d5660e39fd2683706d37b7b9e56e340e1475/
-[web2.example.com] sadame 0.1.0 apply on web2.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/506c6f1bff94679ba2fd7ad417daada1e83802d80a3fe3a56febf45cb884d10f/
+[web2.example.com] sadame 0.2.0 apply on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
-[web1.example.com] sadame 0.1.0 apply on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.2.0 apply on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
-[web2.example.com] changed    file[/etc/motd]
-[web2.example.com]            --- /etc/motd
-[web2.example.com]            +++ /etc/motd (desired)
-[web2.example.com]            @@ -1,7 +1,3 @@
-[web2.example.com]            -
-[web2.example.com]            -The programs included with the Debian GNU/Linux system are free software;
-[web2.example.com]            -the exact distribution terms for each program are described in the
-[web2.example.com]            -individual files in /usr/share/doc/*/copyright.
-[web2.example.com]            -
-[web2.example.com]            -Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-[web2.example.com]            -permitted by applicable law.
-[web2.example.com]            +web2.example.com (production)
-[web2.example.com]            +Groups: web, all
-[web2.example.com]            +Managed by sadame. Local changes will be overwritten.
 [web1.example.com] changed    file[/etc/motd]
 [web1.example.com]            --- /etc/motd
 [web1.example.com]            +++ /etc/motd (desired)
@@ -2154,7 +2313,21 @@ $ echo $?
 [web1.example.com]            +web1.example.com (production)
 [web1.example.com]            +Groups: web, all
 [web1.example.com]            +Managed by sadame. Local changes will be overwritten.
-[db1.example.com] sadame 0.1.0 apply on db1.example.com (Debian GNU/Linux 12 (bookworm))
+[web2.example.com] changed    file[/etc/motd]
+[web2.example.com]            --- /etc/motd
+[web2.example.com]            +++ /etc/motd (desired)
+[web2.example.com]            @@ -1,7 +1,3 @@
+[web2.example.com]            -
+[web2.example.com]            -The programs included with the Debian GNU/Linux system are free software;
+[web2.example.com]            -the exact distribution terms for each program are described in the
+[web2.example.com]            -individual files in /usr/share/doc/*/copyright.
+[web2.example.com]            -
+[web2.example.com]            -Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+[web2.example.com]            -permitted by applicable law.
+[web2.example.com]            +web2.example.com (production)
+[web2.example.com]            +Groups: web, all
+[web2.example.com]            +Managed by sadame. Local changes will be overwritten.
+[db1.example.com] sadame 0.2.0 apply on db1.example.com (Debian GNU/Linux 12 (bookworm))
 [db1.example.com]
 [db1.example.com] changed    file[/etc/motd]
 [db1.example.com]            --- /etc/motd
@@ -2214,7 +2387,7 @@ $ echo $?
 [web2.example.com]   skipped      0
 [web2.example.com]   notified     1  service[nginx]: reload
 [web2.example.com]
-[web2.example.com] Finished in 18.97s.
+[web2.example.com] Finished in 6.47s.
 [web1.example.com] changed    package[nginx]
 [web1.example.com]            state: absent -&gt; installed
 [web1.example.com] changed    directory[/etc/demo-app]
@@ -2259,7 +2432,7 @@ $ echo $?
 [web1.example.com]   skipped      0
 [web1.example.com]   notified     1  service[nginx]: reload
 [web1.example.com]
-[web1.example.com] Finished in 19.88s.
+[web1.example.com] Finished in 8.37s.
 [db1.example.com] changed    package[sqlite3]
 [db1.example.com]            state: absent -&gt; installed
 [db1.example.com] changed    package[cron]
@@ -2293,18 +2466,92 @@ $ echo $?
 [db1.example.com]   skipped      0
 [db1.example.com]   notified     0
 [db1.example.com]
-[db1.example.com] Finished in 37.94s.
+[db1.example.com] Finished in 13.63s.
 
 Hosts
   web1.example.com  ok
   web2.example.com  ok
   db1.example.com   ok
 
-apply on 3 hosts: 3 ok. Finished in 38.16s.
+apply on 3 hosts: 3 ok. Finished in 13.86s.
 </code></pre></div>
 </details>
 <p>With <code>--json</code>, the run prints one document with each host's result and its
 full report; see <a href="../../reference/json-output/#push-mode">JSON output</a>.</p>
+<h3 id="fewer-at-a-time-forks">Fewer at a time: --forks<a class="headerlink" href="#fewer-at-a-time-forks" title="Permanent link">&para;</a></h3>
+<p><code>--forks N</code> works on at most N hosts at once; the next one starts as soon
+as one finishes. Use it when the machine running sadame, or a jump host
+between it and the servers, should not open a connection to every server
+at once. Through a jump host, keep it at 10 or below: past 10 connections
+that are still logging in, OpenSSH's sshd refuses new ones at random
+(<code>MaxStartups</code>).</p>
+<div class="highlight"><pre><span></span><code>sadame<span class="w"> </span>apply<span class="w"> </span>site.rb<span class="w"> </span>-g<span class="w"> </span>all<span class="w"> </span>--forks<span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+<h3 id="rolling-changes-serial">Rolling changes: --serial<a class="headerlink" href="#rolling-changes-serial" title="Permanent link">&para;</a></h3>
+<p><code>--serial N</code> runs the hosts in batches of N, in the order they were
+selected, one batch after another; <code>--serial 25%</code> makes each batch a
+quarter of the hosts. When a host of a batch ends as <code>failed</code>, <code>error</code> or
+<code>unreachable</code>, sadame stops after that batch, and the hosts of later
+batches are <code>skipped</code>: a change that breaks one server does not reach the
+others. <code>drift</code> results do not stop the run.</p>
+<p>Here web2 has a file where the recipe wants a directory, so its apply
+fails and db1, in the third batch, is never touched:</p>
+<div class="highlight"><pre><span></span><code>$ sadame apply site.rb -g all --serial 1
+Batch 1 of 3: web1.example.com
+[web1.example.com] sadame 0.2.0 apply on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com]
+[web1.example.com] unchanged  file[/etc/motd]
+[web1.example.com] unchanged  package[nginx]
+[web1.example.com] unchanged  directory[/etc/demo-app]
+[web1.example.com] unchanged  file[/etc/demo-app/web.conf]
+[web1.example.com] unchanged  file[/etc/nginx/conf.d/demo-app.conf]
+[web1.example.com] unchanged  service[nginx]
+[web1.example.com]
+[web1.example.com] Summary
+[web1.example.com]   changed      0
+[web1.example.com]   unchanged    6
+[web1.example.com]   failed       0
+[web1.example.com]   skipped      0
+[web1.example.com]   notified     0
+[web1.example.com]
+[web1.example.com] Finished in 0.01s.
+
+Batch 2 of 3: web2.example.com
+[web2.example.com] sadame 0.2.0 apply on web2.example.com (Debian GNU/Linux 12 (bookworm))
+[web2.example.com]
+[web2.example.com] unchanged  file[/etc/motd]
+[web2.example.com] unchanged  package[nginx]
+[web2.example.com] failed     directory[/etc/demo-app]
+[web2.example.com]            error: directory[/etc/demo-app]: /etc/demo-app is a regular file, not a directory
+[web2.example.com] skipped    file[/etc/demo-app/web.conf]
+[web2.example.com] skipped    file[/etc/nginx/conf.d/demo-app.conf]
+[web2.example.com] skipped    service[nginx]
+[web2.example.com]
+[web2.example.com] Summary
+[web2.example.com]   changed      0
+[web2.example.com]   unchanged    2
+[web2.example.com]   failed       1  directory[/etc/demo-app]
+[web2.example.com]   skipped      3  file[/etc/demo-app/web.conf]
+[web2.example.com]                   file[/etc/nginx/conf.d/demo-app.conf]
+[web2.example.com]                   service[nginx]
+[web2.example.com]   notified     0
+[web2.example.com]
+[web2.example.com] Finished in 0.00s.
+
+Stopped after batch 2 of 3: web2.example.com did not succeed; 1 host not run.
+
+Hosts
+  web1.example.com  ok
+  web2.example.com  failed
+  db1.example.com   skipped      not run: batch 2 failed
+
+apply on 3 hosts: 1 ok, 1 failed, 1 skipped. Finished in 0.43s.
+
+$ echo $?
+1
+</code></pre></div>
+<p><code>--forks</code> limits each batch too: <code>--serial 10 --forks 5</code> runs batches of
+ten hosts, five at a time.</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2358,14 +2605,14 @@ full report; see <a href="../../reference/json-output/#push-mode">JSON output</a
 Hosts
   web1.example.com  unreachable  connect failed: nobody@web1.example.com: Permission denied (publickey).
 
-plan on 1 host: 1 unreachable. Finished in 0.16s.
+plan on 1 host: 1 unreachable. Finished in 0.13s.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -h web1.example.com
 
 Hosts
   web1.example.com  unreachable  connect failed: Host key verification failed.
 
-plan on 1 host: 1 unreachable. Finished in 0.04s.
+plan on 1 host: 1 unreachable. Finished in 0.03s.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -h deploy@db1.example.com:22
 
@@ -2376,12 +2623,12 @@ plan on 1 host: 1 unreachable. Finished in 0.01s.
 </code></pre></div>
 <p>And a user whose sudo asks for a password:</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -h ops@web1.example.com --sudo
-[web1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/af0ca7fd9b4e138bec76af3a44f0d5660e39fd2683706d37b7b9e56e340e1475/
+[web1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/506c6f1bff94679ba2fd7ad417daada1e83802d80a3fe3a56febf45cb884d10f/
 
 Hosts
   web1.example.com  error        sudo failed: sudo: a password is required
 
-plan on 1 host: 1 error. Finished in 0.24s.
+plan on 1 host: 1 error. Finished in 0.23s.
 </code></pre></div>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
 <ul>

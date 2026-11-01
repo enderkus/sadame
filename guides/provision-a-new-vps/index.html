@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://enderkus.github.io/sadame/guides/provision-a-new-vps/">
       
       
-        <link rel="prev" href="../../resources/user/">
+        <link rel="prev" href="../../resources/git/">
       
       
         <link rel="next" href="../remote-hosts/">
@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1823,8 +1935,8 @@ check the key works and to accept the host key.</p>
 Given <code>ALL</code> as its only command, the user is an administrator with
 passwordless sudo, which sadame needs:</p>
 <div class="highlight"><pre><span></span><code>$ sadame apply examples/06-app-deploy-user -h root@vps1.example.com --var "ssh_keys=$(cat ~/.ssh/id_ed25519.pub)" --var sudo_commands=ALL
-[vps1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/af0ca7fd9b4e138bec76af3a44f0d5660e39fd2683706d37b7b9e56e340e1475/
-[vps1.example.com] sadame 0.1.0 apply on vps1.example.com (Debian GNU/Linux 12 (bookworm))
+[vps1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/506c6f1bff94679ba2fd7ad417daada1e83802d80a3fe3a56febf45cb884d10f/
+[vps1.example.com] sadame 0.2.0 apply on vps1.example.com (Debian GNU/Linux 12 (bookworm))
 [vps1.example.com]
 [vps1.example.com] changed    package[sudo]
 [vps1.example.com]            state: absent -&gt; installed
@@ -1843,7 +1955,7 @@ passwordless sudo, which sadame needs:</p>
 [vps1.example.com]            +++ /home/deploy/.ssh/authorized_keys (desired)
 [vps1.example.com]            @@ -0,0 +1,2 @@
 [vps1.example.com]            +# Managed by sadame. Keys added by hand will be removed.
-[vps1.example.com]            +ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOc/21NUDmmf8m30JpOWfu+h42q3C2n9cln5yDNMxLmi root@319ce7a0275d
+[vps1.example.com]            +ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlOGYTT9w5FKanpV2Itf+V5bOXI7vlwhfTNx65CAp8G root@f89e4fb2d905
 [vps1.example.com] changed    file[/etc/sudoers.d/deploy]
 [vps1.example.com]            state: absent -&gt; present
 [vps1.example.com]            mode: 0440
@@ -1865,12 +1977,12 @@ passwordless sudo, which sadame needs:</p>
 [vps1.example.com]   skipped      0
 [vps1.example.com]   notified     0
 [vps1.example.com]
-[vps1.example.com] Finished in 16.76s.
+[vps1.example.com] Finished in 2.59s.
 
 Hosts
   vps1.example.com  ok
 
-apply on 1 host: 1 ok. Finished in 16.93s.
+apply on 1 host: 1 ok. Finished in 2.77s.
 </code></pre></div>
 <p>The first run copied sadame to the server (<code>~/.sadame/bin/</code>); later runs
 reuse it.</p>
@@ -1879,8 +1991,8 @@ reuse it.</p>
 moves SSH to port 2222, turns off root and password logins, and lets only
 SSH and the ports in <code>open_ports</code> through the firewall:</p>
 <div class="highlight"><pre><span></span><code>$ sadame apply examples/07-hardening-baseline -h deploy@vps1.example.com --sudo --var open_ports=80,443
-[vps1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/af0ca7fd9b4e138bec76af3a44f0d5660e39fd2683706d37b7b9e56e340e1475/
-[vps1.example.com] sadame 0.1.0 apply on vps1.example.com (Debian GNU/Linux 12 (bookworm))
+[vps1.example.com] copying sadame-linux-arm64 to ~/.sadame/bin/506c6f1bff94679ba2fd7ad417daada1e83802d80a3fe3a56febf45cb884d10f/
+[vps1.example.com] sadame 0.2.0 apply on vps1.example.com (Debian GNU/Linux 12 (bookworm))
 [vps1.example.com]
 [vps1.example.com] unchanged  package[openssh-server]
 [vps1.example.com] changed    package[ufw]
@@ -1959,12 +2071,12 @@ SSH and the ports in <code>open_ports</code> through the firewall:</p>
 [vps1.example.com]                   exec[move ssh.socket to the new port]: run
 [vps1.example.com]                   service[fail2ban]: restart
 [vps1.example.com]
-[vps1.example.com] Finished in 26.54s.
+[vps1.example.com] Finished in 13.62s.
 
 Hosts
   vps1.example.com  ok
 
-apply on 1 host: 1 ok. Finished in 26.76s.
+apply on 1 host: 1 ok. Finished in 13.87s.
 </code></pre></div>
 <p>sshd restarted on the new port at the end of the run; the connection that
 ran it was kept, because <code>ufw</code> lets established connections through. On
@@ -1974,7 +2086,7 @@ behind the firewall.</p>
 <h2 id="4-the-web-server">4. The web server<a class="headerlink" href="#4-the-web-server" title="Permanent link">&para;</a></h2>
 <p>From now on, the server is at port 2222:</p>
 <div class="highlight"><pre><span></span><code>$ sadame apply examples/02-nginx-static-site -h deploy@vps1.example.com:2222 --sudo --var server_name=vps1.example.com
-[vps1.example.com] sadame 0.1.0 apply on vps1.example.com (Debian GNU/Linux 12 (bookworm))
+[vps1.example.com] sadame 0.2.0 apply on vps1.example.com (Debian GNU/Linux 12 (bookworm))
 [vps1.example.com]
 [vps1.example.com] changed    package[nginx]
 [vps1.example.com]            state: absent -&gt; installed
@@ -2122,25 +2234,25 @@ behind the firewall.</p>
 [vps1.example.com]   skipped      0
 [vps1.example.com]   notified     1  service[nginx]: reload
 [vps1.example.com]
-[vps1.example.com] Finished in 4.04s.
+[vps1.example.com] Finished in 1.97s.
 
 Hosts
   vps1.example.com  ok
 
-apply on 1 host: 1 ok. Finished in 4.26s.
+apply on 1 host: 1 ok. Finished in 2.19s.
 </code></pre></div>
 <h2 id="5-check-the-result">5. Check the result<a class="headerlink" href="#5-check-the-result" title="Permanent link">&para;</a></h2>
 <p><code>drift</code> on the baseline exits <code>0</code>: everything is as the recipe says. Root
 can no longer log in, and port 22 no longer answers:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift examples/07-hardening-baseline -h deploy@vps1.example.com:2222 --sudo --var open_ports=80,443
-[vps1.example.com] sadame 0.1.0 drift on vps1.example.com (Debian GNU/Linux 12 (bookworm))
+[vps1.example.com] sadame 0.2.0 drift on vps1.example.com (Debian GNU/Linux 12 (bookworm))
 [vps1.example.com]
 [vps1.example.com] No drift: 16 resources match the recipe.
 
 Hosts
   vps1.example.com  ok
 
-drift on 1 host: 1 ok. Finished in 0.38s.
+drift on 1 host: 1 ok. Finished in 0.32s.
 
 $ echo $?
 0
@@ -2215,7 +2327,7 @@ use <code>-g</code>:</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../resources/user/" class="md-footer__link md-footer__link--prev" aria-label="Previous: user">
+          <a href="../../resources/git/" class="md-footer__link md-footer__link--prev" aria-label="Previous: git">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2225,7 +2337,7 @@ use <code>-g</code>:</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                user
+                git
               </div>
             </div>
           </a>

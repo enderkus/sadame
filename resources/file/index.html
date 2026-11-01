@@ -16,7 +16,7 @@
         <link rel="prev" href="../package/">
       
       
-        <link rel="next" href="../directory/">
+        <link rel="next" href="../line/">
       
       
         
@@ -848,6 +848,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../directory/" class="md-nav__link">
         
   
@@ -856,6 +884,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -940,6 +996,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1912,7 +2024,7 @@ replaced, the file keeps its current mode, owner and group.</p>
 </code></pre></div>
 <h3 id="first-apply">First apply<a class="headerlink" href="#first-apply" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/file
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    file[/etc/issue.net]
            --- /etc/issue.net
@@ -1960,7 +2072,7 @@ Finished in 0.38s.
 <h3 id="changing-a-template-variable">Changing a template variable<a class="headerlink" href="#changing-a-template-variable" title="Permanent link">&para;</a></h3>
 <p>Rendering with a different var shows exactly which lines change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/file --var environment=production
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/hello/hello.conf]
     --- /etc/hello/hello.conf
@@ -1991,7 +2103,7 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 4 unchanged.
 <div class="highlight"><pre><span></span><code>$ sudo chmod 0644 /etc/hello/hello.conf
 
 $ sudo sadame plan examples/resources/file
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/hello/hello.conf]
     mode: 0644 -&gt; 0640
@@ -2075,13 +2187,13 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 4 unchanged.
         
         
           
-          <a href="../directory/" class="md-footer__link md-footer__link--next" aria-label="Next: directory">
+          <a href="../line/" class="md-footer__link md-footer__link--next" aria-label="Next: line">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                directory
+                line
               </div>
             </div>
             <div class="md-footer__button md-icon">

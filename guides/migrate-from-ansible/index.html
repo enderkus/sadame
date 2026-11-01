@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -2003,6 +2115,14 @@ and its translation, which the test suite applies on Debian and Ubuntu.</p>
 <td><code>sadame plan</code></td>
 </tr>
 <tr>
+<td><code>forks</code></td>
+<td><code>--forks</code></td>
+</tr>
+<tr>
+<td><code>serial:</code></td>
+<td><code>--serial</code></td>
+</tr>
+<tr>
 <td>no built-in drift command</td>
 <td><code>sadame drift</code></td>
 </tr>
@@ -2138,12 +2258,13 @@ and sadame's <code>drift</code> always reports it.</p>
 <span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s">"^EDITOR="</span>
 <span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EDITOR=vim</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># No lineinfile: manage the whole file with file, or guard an exec.</span>
-<span class="nb">exec</span><span class="w"> </span><span class="s2">"echo EDITOR=vim &gt;&gt; /etc/environment"</span><span class="p">,</span><span class="w"> </span><span class="ss">not_if</span><span class="p">:</span><span class="w"> </span><span class="s2">"grep -q '^EDITOR=vim$' /etc/environment"</span>
+<div class="highlight"><pre><span></span><code><span class="n">line</span><span class="w"> </span><span class="s2">"EDITOR=vim"</span><span class="p">,</span><span class="w"> </span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s2">"/etc/environment"</span><span class="p">,</span><span class="w"> </span><span class="ss">match</span><span class="p">:</span> <span class="sr">/^EDITOR=/</span>
 </code></pre></div>
-<p>sadame has no <code>lineinfile</code>. Prefer managing the whole file with <code>file</code>, so
-the recipe states what the file contains; for files other programs also
-edit, a guarded <code>exec</code> as above works.</p>
+<p><code>line</code> is sadame's <code>lineinfile</code>: <code>match</code> plays the part of <code>regexp</code>, and
+<code>state: :absent</code> removes the line. One difference: when several lines
+match, <code>line</code> replaces all of them, where <code>lineinfile</code> replaces the last
+one. Prefer managing the whole file with <code>file</code> when sadame can own it, so
+the recipe states what the file contains; see <a href="../../resources/line/">line</a>.</p>
 <h3 id="cron">cron<a class="headerlink" href="#cron" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nightly backup</span>
 <span class="w">      </span><span class="nt">ansible.builtin.cron</span><span class="p">:</span>
@@ -2270,14 +2391,17 @@ vars override the groups it includes. Ansible has many more layers
 (role defaults, facts, <code>set_fact</code>); sadame has four, listed on the
 <a href="../../recipes/inventory/#vars-precedence">Inventory</a> page.</p>
 <h2 id="gaps">Gaps<a class="headerlink" href="#gaps" title="Permanent link">&para;</a></h2>
-<p>Things Ansible does that sadame 0.1 does not:</p>
+<p>Things Ansible does that sadame does not:</p>
 <ul>
 <li>no facts gathering beyond <code>platform</code> (os-release) and <code>host_name</code>,
   <code>host_groups</code>;</li>
-<li>no modules beyond <code>package</code>, <code>file</code>, <code>directory</code>, <code>service</code>, <code>exec</code> and
-  <code>user</code>: no <code>git</code>, <code>apt_repository</code>, <code>mount</code>, <code>sysctl</code>, <code>firewalld</code> and
-  so on; use <code>file</code> and guarded <code>exec</code> (see <code>examples/04-docker-host</code> for a
-  package repository);</li>
+<li>ten resource types (<code>package</code>, <code>file</code>, <code>line</code>, <code>directory</code>, <code>link</code>,
+  <code>service</code>, <code>exec</code>, <code>user</code>, <code>group</code>, <code>git</code>) where Ansible has thousands
+  of modules: no <code>apt_repository</code>, <code>mount</code>, <code>sysctl</code>, <code>firewalld</code> and so
+  on; use <code>file</code>, <code>line</code> and guarded <code>exec</code> (see <code>examples/04-docker-host</code>
+  for a package repository);</li>
+<li>no <code>max_fail_percentage</code>: <code>--serial</code> stops after the first batch with a
+  failure;</li>
 <li>no Windows, no network devices, no agent or pull mode;</li>
 <li>no vault; read secrets from the environment in <code>vars.rb</code>;</li>
 <li>no roles from Galaxy: recipes are files you <code>include_recipe</code>.</li>

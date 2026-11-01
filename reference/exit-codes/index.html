@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1815,9 +1927,9 @@ highest status among them:</p>
 </table>
 <p>One host that drifted makes the whole run exit <code>1</code>:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift site.rb --limit 'web*'
-[web1.example.com] sadame 0.1.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.2.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
-[web2.example.com] sadame 0.1.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
+[web2.example.com] sadame 0.2.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
 [web2.example.com] ~ file[/etc/demo-app/web.conf]
 [web2.example.com]     --- /etc/demo-app/web.conf
@@ -1835,7 +1947,7 @@ Hosts
   web1.example.com  ok
   web2.example.com  drift
 
-drift on 2 hosts: 1 ok, 1 drift. Finished in 0.22s.
+drift on 2 hosts: 1 ok, 1 drift. Finished in 0.23s.
 
 $ echo $?
 1
@@ -1843,7 +1955,7 @@ $ echo $?
 <p>One host that cannot be reached makes it exit <code>2</code>, and the other hosts
 still run:</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan site.rb -g db -h deploy@db2.example.com
-[db1.example.com] sadame 0.1.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
+[db1.example.com] sadame 0.2.0 plan on db1.example.com (Debian GNU/Linux 12 (bookworm))
 [db1.example.com]
 [db1.example.com] Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 6 unchanged.
 
@@ -1851,7 +1963,7 @@ Hosts
   db1.example.com  ok
   db2.example.com  unreachable  connect failed: ssh: Could not resolve hostname db2.example.com: Name or service not known
 
-plan on 2 hosts: 1 ok, 1 unreachable. Finished in 0.20s.
+plan on 2 hosts: 1 ok, 1 unreachable. Finished in 0.22s.
 
 $ echo $?
 2

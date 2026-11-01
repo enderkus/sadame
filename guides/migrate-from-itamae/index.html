@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1139,10 +1251,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resources-itamae-has-and-sadame-01-does-not" class="md-nav__link">
+  <a href="#resources-itamae-has-and-sadame-does-not" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resources Itamae has and sadame 0.1 does not
+        Resources Itamae has and sadame does not
       
     </span>
   </a>
@@ -1681,10 +1793,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resources-itamae-has-and-sadame-01-does-not" class="md-nav__link">
+  <a href="#resources-itamae-has-and-sadame-does-not" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resources Itamae has and sadame 0.1 does not
+        Resources Itamae has and sadame does not
       
     </span>
   </a>
@@ -1851,7 +1963,8 @@ instance variables, sadame's <code>locals:</code> as a Hash.</p>
 <ul>
 <li>Recipes are Ruby files evaluated in order; resources run in the order
   they are declared.</li>
-<li><code>package</code>, <code>directory</code>, <code>file</code>, <code>user</code> and <code>service</code> keep their names.</li>
+<li><code>package</code>, <code>directory</code>, <code>file</code>, <code>user</code>, <code>service</code>, <code>group</code>, <code>link</code> and
+  <code>git</code> keep their names.</li>
 <li><code>include_recipe "path"</code>, relative to the including file, each file once.</li>
 <li><code>notifies</code> and <code>subscribes</code>, with delayed notifications by default and
   <code>:immediately</code>.</li>
@@ -1882,6 +1995,14 @@ instance variables, sadame's <code>locals:</code> as a Hash.</p>
 <tr>
 <td><code>service "x" do action [:enable, :start] end</code></td>
 <td><code>service "x", enable: true, state: :running</code></td>
+</tr>
+<tr>
+<td><code>link "/srv/app/current" do to "/srv/app/v2" end</code></td>
+<td><code>link "/srv/app/current", to: "/srv/app/v2"</code></td>
+</tr>
+<tr>
+<td><code>git "/srv/app" do repository "URL"; revision "v2" end</code></td>
+<td><code>git "/srv/app", repository: "URL", revision: "v2"</code></td>
 </tr>
 <tr>
 <td><code>action :nothing</code></td>
@@ -1938,31 +2059,29 @@ mruby limits on recipe code are similar (no gems, no standard library); see
 <a href="../../contributing/architecture/#code-that-must-run-on-mruby">Architecture</a>.
 The differences from mitamae are the same as above, plus push over SSH,
 inventories and <code>drift</code>.</p>
-<h2 id="resources-itamae-has-and-sadame-01-does-not">Resources Itamae has and sadame 0.1 does not<a class="headerlink" href="#resources-itamae-has-and-sadame-01-does-not" title="Permanent link">&para;</a></h2>
-<p><code>link</code>, <code>group</code>, <code>git</code>, <code>http_request</code>, <code>local_ruby_block</code>, <code>gem_package</code>
-and plugins. Use <code>exec</code> with a guard in the meantime:</p>
+<h2 id="resources-itamae-has-and-sadame-does-not">Resources Itamae has and sadame does not<a class="headerlink" href="#resources-itamae-has-and-sadame-does-not" title="Permanent link">&para;</a></h2>
+<p><code>http_request</code>, <code>local_ruby_block</code>, <code>gem_package</code> and plugins. Use <code>exec</code>
+with a guard in their place:</p>
 <table>
 <thead>
 <tr>
 <th>Itamae</th>
-<th>With sadame 0.1</th>
+<th>sadame</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>link "/etc/app/current" do to "/srv/app/v2" end</code></td>
-<td><code>exec "ln -sfn /srv/app/v2 /etc/app/current", not_if: "test \"$(readlink /etc/app/current)\" = /srv/app/v2"</code></td>
+<td><code>http_request "/srv/app/example.html" do url "https://..." end</code></td>
+<td><code>exec "curl -fsSL -o /srv/app/example.html https://...", creates: "/srv/app/example.html"</code></td>
 </tr>
 <tr>
-<td><code>group "deploy"</code></td>
-<td><code>exec "groupadd deploy", not_if: "getent group deploy"</code></td>
-</tr>
-<tr>
-<td><code>git "/srv/app" do repository "..." end</code></td>
-<td><code>exec "git clone URL /srv/app", creates: "/srv/app/.git"</code></td>
+<td><code>gem_package "bundler"</code></td>
+<td><code>exec "gem install bundler", not_if: "gem list -i bundler"</code></td>
 </tr>
 </tbody>
 </table>
+<p><code>link</code>, <code>group</code> and <code>git</code> came in sadame 0.2.0; before that, they needed a
+guarded <code>exec</code> too.</p>
 <h2 id="how-to-port">How to port<a class="headerlink" href="#how-to-port" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Move <code>node.json</code> or <code>node.yml</code> values into <code>vars.rb</code> (a Ruby Hash).</li>

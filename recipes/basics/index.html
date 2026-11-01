@@ -831,6 +831,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -839,6 +867,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -923,6 +979,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1791,7 +1903,7 @@ files, and how templates work.</p>
 </code></pre></div>
 <p>Planned on a fresh Debian 12 machine:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[curl]
     state: absent -&gt; installed
@@ -1934,7 +2046,7 @@ always become symbols.</p>
 </table>
 <p>Adding a maintenance window for one run changes the template output:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics --var maintenance='Sundays 02:00-03:00 UTC'
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[curl]
     state: absent -&gt; installed
@@ -2020,7 +2132,7 @@ visible.</p>
 <p>After <code>apply</code>, changing a var shows exactly which lines of the rendered file
 change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics --var contact=platform@example.com
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/motd]
     --- /etc/motd
@@ -2036,7 +2148,7 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 3 unchanged.
 <p>An error in a template fails that resource and names the template and
 line. Here <code>templates/app.conf.erb</code> contains <code>port = &lt;%= port %&gt;</code>:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 x file[/etc/app.conf]
     error: templates/app.conf.erb:3: undefined method 'port' for Sadame::Template::Scope

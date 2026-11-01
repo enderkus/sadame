@@ -859,6 +859,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -867,6 +895,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -951,6 +1007,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1956,7 +2068,7 @@ file and settings:</p>
 it, before the service is enabled and started. At the end, the delayed
 restart runs once, although both files asked for it:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/notifications
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  exec[systemctl daemon-reload]
 changed    file[/etc/systemd/system/ticker.service]
@@ -2003,7 +2115,7 @@ Finished in 0.07s.
 <h3 id="changing-a-setting">Changing a setting<a class="headerlink" href="#changing-a-setting" title="Permanent link">&para;</a></h3>
 <p><code>plan</code> shows which notifications a change would trigger:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/notifications --var interval=30
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/default/ticker]
     --- /etc/default/ticker
@@ -2017,7 +2129,7 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 3 unchanged.
 </code></pre></div>
 <p><code>apply</code> restarts the service once the settings file is written:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/notifications --var interval=30
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  exec[systemctl daemon-reload]
 unchanged  file[/etc/systemd/system/ticker.service]
@@ -2043,7 +2155,7 @@ Finished in 0.01s.
 <p>A changed unit file triggers both: <code>daemon-reload</code> right away, the restart
 at the end.</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/notifications --var interval=30 --var description='Ticker demo'
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  exec[systemctl daemon-reload]
 changed    file[/etc/systemd/system/ticker.service]

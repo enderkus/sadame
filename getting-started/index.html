@@ -862,6 +862,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../resources/directory/" class="md-nav__link">
         
   
@@ -870,6 +898,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -954,6 +1010,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1835,7 +1947,7 @@ resource:</p>
 <p><code>sadame plan</code> reads the current state of everything the recipe declares and
 prints what <code>apply</code> would change. It changes nothing.</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan examples/01-hello
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + file[/tmp/sadame-hello.txt]
     state: absent -&gt; present
@@ -1852,7 +1964,7 @@ sadame looks for <code>./recipe.rb</code>.</p>
 <p><code>sadame apply</code> makes the same comparison, resource by resource, and changes
 only what differs:</p>
 <div class="highlight"><pre><span></span><code>$ sadame apply examples/01-hello
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    file[/tmp/sadame-hello.txt]
            state: absent -&gt; present
@@ -1868,13 +1980,13 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.09s.
+Finished in 0.08s.
 </code></pre></div>
 <p>Run <code>plan</code> again and there is nothing left to do. That is what idempotent
 means here: once the machine matches the recipe, running it again changes
 nothing.</p>
 <div class="highlight"><pre><span></span><code>$ sadame plan examples/01-hello
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 </code></pre></div>
@@ -1883,7 +1995,7 @@ Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 <div class="highlight"><pre><span></span><code>$ echo 'Hello from someone else' &gt; /tmp/sadame-hello.txt
 
 $ sadame plan examples/01-hello
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/tmp/sadame-hello.txt]
     --- /tmp/sadame-hello.txt
@@ -1945,7 +2057,7 @@ resources are counted but not listed.</p>
 whether the machine still matches the recipe: <code>0</code> when it does, <code>1</code> when it
 has drifted. That makes it the command for scripts, cron jobs and CI:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift examples/01-hello
-sadame 0.1.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/tmp/sadame-hello.txt]
     --- /tmp/sadame-hello.txt
@@ -1968,7 +2080,7 @@ is described in the <a href="../reference/json-output/">JSON output reference</a
 <div class="highlight"><pre><span></span><code>$ sadame plan examples/01-hello --json
 {
   "format_version": 1,
-  "sadame_version": "0.1.0",
+  "sadame_version": "0.2.0",
   "command": "plan",
   "host": "local",
   "platform": {

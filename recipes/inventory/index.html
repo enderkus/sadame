@@ -870,6 +870,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -878,6 +906,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -962,6 +1018,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -1851,7 +1963,7 @@ file or a cloud provider's CLI. There is no plugin system to learn.</p>
 <p><code>sadame hosts</code> shows what sadame makes of it: every host, how it will be
 reached, and each var with the layer it came from:</p>
 <div class="highlight"><pre><span></span><code>$ sadame hosts
-sadame 0.1.0 hosts: 3 hosts from hosts.rb
+sadame 0.2.0 hosts: 3 hosts from hosts.rb
 
 web1.example.com
   address   web1.example.com
@@ -2020,7 +2132,7 @@ wins for the same key:</p>
 for <code>web2</code>; <code>env</code> is <code>"staging"</code> in <code>vars.rb</code> but <code>"production"</code> from
 <code>all</code>, which includes <code>web</code> and <code>db</code>. <code>--var</code> overrides all of them:</p>
 <div class="highlight"><pre><span></span><code>$ sadame hosts --limit web2.example.com --var workers=16
-sadame 0.1.0 hosts: 1 host from hosts.rb
+sadame 0.2.0 hosts: 1 host from hosts.rb
 
 web2.example.com
   address   web2.example.com
@@ -2110,7 +2222,7 @@ they are <code>"local"</code> and <code>[]</code>, unless set with <code>--host-
 <span class="p">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame hosts -g db
-sadame 0.1.0 hosts: 1 host from hosts.rb
+sadame 0.2.0 hosts: 1 host from hosts.rb
 
 db1.example.com
   address   203.0.113.21

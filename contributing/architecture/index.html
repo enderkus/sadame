@@ -705,6 +705,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../resources/line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../resources/directory/" class="md-nav__link">
         
   
@@ -713,6 +741,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -797,6 +853,62 @@
     
   
     user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
   
 
     
@@ -2005,7 +2117,7 @@ order; the mruby build compiles the same list.</p>
 </tr>
 <tr>
 <td><code>push/run.rb</code></td>
-<td>Push mode: bundles the recipe, detects each target's system, finds binaries, runs every target, prints the summary or the combined JSON.</td>
+<td>Push mode: bundles the recipe, detects each target's system, finds binaries, runs every target (in <code>--serial</code> batches when asked), prints the summary or the combined JSON.</td>
 </tr>
 <tr>
 <td><code>push/session.rb</code></td>
@@ -2021,7 +2133,7 @@ order; the mruby build compiles the same list.</p>
 </tr>
 <tr>
 <td><code>push/parallel.rb</code></td>
-<td>Runs one child process per target and prints their output as it arrives.</td>
+<td>Runs one child process per target, at most <code>--forks</code> at a time, and prints their output as it arrives.</td>
 </tr>
 <tr>
 <td><code>ruby_literal.rb</code></td>
@@ -2073,7 +2185,7 @@ order; the mruby build compiles the same list.</p>
 </tr>
 <tr>
 <td><code>host.rb</code></td>
-<td>The machine being configured: its shell plus facts read once (platform, package manager, systemd).</td>
+<td>The machine being configured: its shell plus facts read once (platform, package manager, service manager).</td>
 </tr>
 <tr>
 <td><code>platform.rb</code></td>

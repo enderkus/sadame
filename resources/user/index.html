@@ -16,7 +16,7 @@
         <link rel="prev" href="../exec/">
       
       
-        <link rel="next" href="../../guides/provision-a-new-vps/">
+        <link rel="next" href="../group/">
       
       
         
@@ -707,6 +707,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../directory/" class="md-nav__link">
         
   
@@ -715,6 +743,34 @@
     
   
     directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    link
   
 
     
@@ -948,6 +1004,62 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1859,7 +1971,7 @@ files.</p>
 </code></pre></div>
 <h3 id="a-deploy-user-and-a-service-account">A deploy user and a service account<a class="headerlink" href="#a-deploy-user-and-a-service-account" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/user
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + user[deploy]
     state: absent -&gt; present
@@ -1874,7 +1986,7 @@ sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 0 unchanged.
 
 $ sudo sadame apply examples/resources/user
-sadame 0.1.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    user[deploy]
            state: absent -&gt; present
@@ -1893,7 +2005,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.19s.
+Finished in 0.21s.
 
 $ id deploy
 uid=1000(deploy) gid=1000(deploy) groups=1000(deploy),4(adm)
@@ -1905,7 +2017,7 @@ uid=1000(deploy) gid=1000(deploy) groups=1000(deploy),4(adm)
 <span class="n">user</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w"> </span><span class="ss">groups</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="s2">"docker"</span><span class="o">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/user/docker_group.rb
-sadame 0.1.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[docker.io]
     state: absent -&gt; installed
@@ -1991,13 +2103,13 @@ Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 0 unchanged.
         
         
           
-          <a href="../../guides/provision-a-new-vps/" class="md-footer__link md-footer__link--next" aria-label="Next: Provision a new VPS">
+          <a href="../group/" class="md-footer__link md-footer__link--next" aria-label="Next: group">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Provision a new VPS
+                group
               </div>
             </div>
             <div class="md-footer__button md-icon">
