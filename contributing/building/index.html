@@ -1767,12 +1767,11 @@ it is installed.</p>
 <ul>
 <li><strong><code>.github/workflows/build.yml</code></strong> builds <code>linux-amd64</code> on an x86_64
   runner, <code>linux-arm64</code> on an ARM64 runner and both macOS binaries on a
-  macOS runner. A separate job then registers QEMU with
-  <code>tonistiigi/binfmt</code>, checks with <code>file</code> that both Linux binaries are
-  statically linked, and runs the verification for both architectures on
-  the x86_64 runner: the arm64 binary runs under emulation there. A last
-  job serves the binaries over HTTP and runs <code>install.sh</code> against them,
-  once with correct checksums and once with a wrong one, which must fail.</li>
+  macOS runner. Each Linux binary is then verified on a runner of its own
+  architecture: <code>file</code> must report it statically linked, and it runs in
+  every distribution image. A last job serves the binaries over HTTP and
+  runs <code>install.sh</code> against them, once with correct checksums and once
+  with a wrong one, which must fail.</li>
 <li><strong><code>ci.yml</code></strong> runs that workflow on every push and pull request, after the
   test jobs.</li>
 <li><strong><code>release.yml</code></strong> runs on a <code>v*</code> tag. After the build workflow passes, it

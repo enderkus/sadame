@@ -1712,31 +1712,34 @@ the OpenSSH client then checks, among other things, <code>-h user@host:2222</cod
 configuration passed with <code>-F</code>, vars precedence on the targets, sudo, a
 parallel run of example 08 on all three hosts, and an unreachable host.</p>
 <h3 id="what-arm64-coverage-means">What arm64 coverage means<a class="headerlink" href="#what-arm64-coverage-means" title="Permanent link">&para;</a></h3>
-<p>In CI, arm64 runs on x86_64 machines under QEMU, registered with
-<code>tonistiigi/binfmt</code>: the arm64 binary and the arm64 distribution images,
-emulated instruction by instruction. That tests the arm64 build and the
-arm64 packages of each distribution, but not real arm64 hardware; there is
-no arm64 VM in the VM layer yet. On an ARM64 machine (such as a Mac with
-Apple silicon running Docker), <code>rake test:docker</code> runs arm64 natively.</p>
-<p>Emulation has limits. QEMU's user mode cannot run iptables or nftables, so
-<code>04-docker-host</code> (Docker's daemon) and <code>07-hardening-baseline</code> (<code>ufw</code>) are
-skipped where the containers are emulated, with that reason in the report;
-they run in the amd64 jobs and natively on ARM64 machines.</p>
-<p>Arch Linux's systemd does not boot under emulation either. Under QEMU, the
-Arch Linux ARM container's systemd (version 262 in our tests) starts and
-then spins at full CPU without making progress, so nothing can talk to it.
-The emulated Arch job therefore starts its containers without systemd,
-like Alpine, and skips the examples marked <code>systemd: true</code> in
-<code>test/support/example_matrix.rb</code>, with that reason in the report; a unit
-test keeps the mark in step with the recipes. Arch with systemd runs in the
-amd64 job and natively on ARM64 machines. Under Rosetta (Docker Desktop and
-OrbStack on Apple silicon), an x86_64 Arch Linux container could not boot
-its systemd either, so run the amd64 Arch tests in CI or on an x86_64
-machine.</p>
+<p>In CI, the arm64 jobs run on GitHub's ARM64 runners: the arm64 binary and
+the arm64 distribution images on a real arm64 kernel, with nothing
+emulated, so they run the same examples as the amd64 jobs. That covers the
+arm64 build and each distribution's arm64 packages; there is no arm64 VM in
+the VM layer yet. On an ARM64 machine (such as a Mac with Apple silicon
+running Docker), <code>rake test:docker</code> runs arm64 natively too.</p>
+<p>You can also run the other architecture locally under emulation (QEMU,
+registered with <code>docker run --privileged --rm tonistiigi/binfmt --install
+all</code>; the runner notices and says so). Emulation has limits:</p>
+<ul>
+<li>QEMU's user mode cannot run iptables or nftables, so <code>04-docker-host</code>
+  (Docker's daemon) and <code>07-hardening-baseline</code> (<code>ufw</code>) are skipped in
+  emulated containers, with that reason in the report.</li>
+<li>Arch Linux's systemd does not boot under QEMU: the Arch Linux ARM
+  container's systemd (version 262 in our tests) starts and then spins at
+  full CPU without making progress. Emulated Arch containers therefore run
+  without systemd, like Alpine, and skip the examples marked
+  <code>systemd: true</code> in <code>test/support/example_matrix.rb</code>; a unit test keeps
+  the mark in step with the recipes.</li>
+<li>Under Rosetta (Docker Desktop and OrbStack on Apple silicon), an x86_64
+  Arch Linux container could not boot its systemd either, so run the amd64
+  Arch tests in CI or on an x86_64 machine.</li>
+</ul>
 <h3 id="running-the-docker-tests-in-ci">Running the Docker tests in CI<a class="headerlink" href="#running-the-docker-tests-in-ci" title="Permanent link">&para;</a></h3>
 <p><code>.github/workflows/ci.yml</code> runs <code>rake "test:docker[DISTRO,ARCH]"</code> for all
-ten combinations, plus <code>rake test:push</code>, after the build workflow has made
-and verified the binaries. Each combination is its own job, so one failing
+ten combinations, the amd64 ones on x86_64 runners and the arm64 ones on
+ARM64 runners, plus <code>rake test:push</code>, after the build workflow has made and
+verified the binaries. Each combination is its own job, so one failing
 distribution does not hide the others.</p>
 <h2 id="vm-tests">VM tests<a class="headerlink" href="#vm-tests" title="Permanent link">&para;</a></h2>
 <p>The VM layer runs the examples on libvirt virtual machines that the
