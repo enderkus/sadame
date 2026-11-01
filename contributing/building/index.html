@@ -1965,6 +1965,9 @@ it is installed.</p>
    <code>rake "packaging[0.1.0]"</code>, and commit them: the Homebrew formula in
    <code>homebrew/sadame.rb</code> and the AUR package (<code>PKGBUILD</code> and <code>.SRCINFO</code>)
    in <code>packaging/aur/</code>.</li>
+<li>Copy <code>homebrew/sadame.rb</code> to <code>Formula/sadame.rb</code> in the
+   <a href="https://github.com/enderkus/homebrew-sadame">enderkus/homebrew-sadame</a>
+   tap and push it there; <code>brew upgrade sadame</code> then finds the release.</li>
 </ol>
 <h2 id="building-a-release-locally">Building a release locally<a class="headerlink" href="#building-a-release-locally" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>rake<span class="w"> </span>build:linux-amd64<span class="w"> </span>build:linux-arm64<span class="w"> </span>verify:linux-amd64<span class="w"> </span>verify:linux-arm64
