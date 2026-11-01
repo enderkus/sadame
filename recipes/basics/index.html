@@ -688,6 +688,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -1903,7 +1931,7 @@ files, and how templates work.</p>
 </code></pre></div>
 <p>Planned on a fresh Debian 12 machine:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics
-sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[curl]
     state: absent -&gt; installed
@@ -1980,6 +2008,10 @@ $ echo $?
 <td><code>ID</code>, <code>VERSION_ID</code>, <code>VERSION_CODENAME</code> and <code>PRETTY_NAME</code> from <code>/etc/os-release</code></td>
 </tr>
 <tr>
+<td><code>facts[:cpus]</code>, <code>facts[:memory_mb]</code>, <code>facts[:ipv4]</code> and more</td>
+<td>what the machine has, read from it; see <a href="../facts/">Facts</a></td>
+</tr>
+<tr>
 <td><code>host_name</code>, <code>host_groups</code></td>
 <td>the host's name and groups from the inventory; see <a href="../inventory/#using-groups-in-recipes">Inventory</a></td>
 </tr>
@@ -2046,7 +2078,7 @@ always become symbols.</p>
 </table>
 <p>Adding a maintenance window for one run changes the template output:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics --var maintenance='Sundays 02:00-03:00 UTC'
-sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[curl]
     state: absent -&gt; installed
@@ -2123,16 +2155,16 @@ Ruby's ERB library:</p>
 </tr>
 </tbody>
 </table>
-<p>Inside a template, <code>vars</code> is the run's vars and <code>locals</code> is the Hash given
-to the <code>file</code> resource's <code>locals:</code> option. Nothing else from the recipe is
-visible.</p>
+<p>Inside a template, <code>vars</code> is the run's vars, <code>locals</code> is the Hash given
+to the <code>file</code> resource's <code>locals:</code> option, and <code>facts</code> are the machine's
+<a href="../facts/">facts</a>. Nothing else from the recipe is visible.</p>
 <p>The template is looked up in the recipe's directory first, then in its
 <code>templates/</code> subdirectory. <code>parts/motd.rb</code> above uses <code>motd.erb</code>, found at
 <code>parts/templates/motd.erb</code>.</p>
 <p>After <code>apply</code>, changing a var shows exactly which lines of the rendered file
 change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/basics --var contact=platform@example.com
-sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/motd]
     --- /etc/motd
@@ -2148,7 +2180,7 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 3 unchanged.
 <p>An error in a template fails that resource and names the template and
 line. Here <code>templates/app.conf.erb</code> contains <code>port = &lt;%= port %&gt;</code>:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan
-sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 x file[/etc/app.conf]
     error: templates/app.conf.erb:3: undefined method 'port' for Sadame::Template::Scope

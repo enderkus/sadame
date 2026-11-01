@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1964,7 +1992,7 @@ the link should be is always an error, even with <code>force: true</code>.</p>
 </code></pre></div>
 <h3 id="releases-and-a-current-link">Releases and a current link<a class="headerlink" href="#releases-and-a-current-link" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/link
-sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    directory[/srv/app/releases/1]
            state: absent -&gt; present
@@ -1997,7 +2025,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.30s.
+Finished in 0.29s.
 
 $ readlink /srv/app/current /usr/local/bin/app-console
 releases/2
@@ -2010,7 +2038,7 @@ release 2
 <div class="highlight"><pre><span></span><code>$ sudo ln -sfn releases/1 /srv/app/current
 
 $ sudo sadame drift examples/resources/link
-sadame 0.2.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 ~ link[/srv/app/current]
     to: releases/1 -&gt; releases/2
@@ -2018,7 +2046,7 @@ sadame 0.2.0 drift on local (Debian GNU/Linux 12 (bookworm))
 Drift: 1 of 6 resources differs from the recipe.
 
 $ sudo sadame apply examples/resources/link
-sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  directory[/srv/app/releases/1]
 unchanged  directory[/srv/app/releases/2]
@@ -2035,7 +2063,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.25s.
+Finished in 0.22s.
 </code></pre></div>
 <h3 id="reloading-a-service-when-a-link-changes">Reloading a service when a link changes<a class="headerlink" href="#reloading-a-service-when-a-link-changes" title="Permanent link">&para;</a></h3>
 <p>A link that enables a configuration can notify the service that reads it:</p>

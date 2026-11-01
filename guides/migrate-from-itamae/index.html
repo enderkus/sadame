@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -2011,6 +2039,10 @@ instance variables, sadame's <code>locals:</code> as a Hash.</p>
 <tr>
 <td><code>node[:attr]</code>, <code>-j node.json</code>, <code>-y node.yml</code></td>
 <td><code>vars[:attr]</code>, <code>vars.rb</code>, <code>--var</code>, vars in <code>hosts.rb</code></td>
+</tr>
+<tr>
+<td>host inventory in <code>node</code>: <code>node[:cpu][:total]</code>, <code>node[:memory][:total]</code>, <code>node[:hostname]</code></td>
+<td><code>facts[:cpus]</code>, <code>facts[:memory_mb]</code>, <code>facts[:hostname]</code></td>
 </tr>
 <tr>
 <td><code>@name</code> in templates</td>

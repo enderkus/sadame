@@ -560,6 +560,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../recipes/notifications/" class="md-nav__link">
         
   
@@ -1656,15 +1684,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#020-2026-11-01" class="md-nav__link">
+  <a href="#030-2026-11-01" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.2.0 - 2026-11-01
+        0.3.0 - 2026-11-01
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0.2.0 - 2026-11-01">
+    <nav class="md-nav" aria-label="0.3.0 - 2026-11-01">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1680,6 +1708,45 @@
         
           <li class="md-nav__item">
   <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#020-2026-11-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2.0 - 2026-11-01
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.2.0 - 2026-11-01">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Changed
@@ -1718,7 +1785,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#added_1" class="md-nav__link">
+  <a href="#added_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Added
@@ -1779,15 +1846,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#020-2026-11-01" class="md-nav__link">
+  <a href="#030-2026-11-01" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.2.0 - 2026-11-01
+        0.3.0 - 2026-11-01
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0.2.0 - 2026-11-01">
+    <nav class="md-nav" aria-label="0.3.0 - 2026-11-01">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1803,6 +1870,45 @@
         
           <li class="md-nav__item">
   <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#020-2026-11-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2.0 - 2026-11-01
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.2.0 - 2026-11-01">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Changed
@@ -1841,7 +1947,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#added_1" class="md-nav__link">
+  <a href="#added_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Added
@@ -1880,11 +1986,29 @@
 <p>All notable changes to this project are documented in this file. The format
 follows <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and the
 project uses <a href="https://semver.org/">Semantic Versioning</a>.</p>
-<h2 id="unreleased"><a href="https://github.com/enderkus/sadame/compare/v0.2.0...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
+<h2 id="unreleased"><a href="https://github.com/enderkus/sadame/compare/v0.3.0...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
+<h2 id="030-2026-11-01"><a href="https://github.com/enderkus/sadame/compare/v0.2.0...v0.3.0">0.3.0</a> - 2026-11-01<a class="headerlink" href="#030-2026-11-01" title="Permanent link">&para;</a></h2>
+<p>Recipes can see the machine they run on.</p>
+<h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>facts</code> in recipes and templates: <code>hostname</code>, <code>fqdn</code>, <code>arch</code>, <code>kernel</code>,
+  <code>cpus</code>, <code>memory_mb</code>, <code>swap_mb</code>, <code>root_disk_gb</code>, <code>ipv4</code>,
+  <code>default_interface</code>, <code>ipv4_addresses</code>, <code>ipv6_addresses</code>,
+  <code>virtualization</code>, <code>container</code>, <code>service_manager</code> and <code>machine_id</code>, read
+  on the machine when first asked for. What cannot be read is nil; an
+  unknown name is an error that lists the facts.</li>
+<li><code>sadame facts</code> prints the facts of this machine, or with <code>-h</code>, <code>-g</code> or
+  <code>--limit</code> of each selected host over SSH; <code>--json</code> as well.</li>
+</ul>
+<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Example 05 sizes PostgreSQL's <code>shared_buffers</code> to a quarter of the
+  machine's memory unless vars set it.</li>
+</ul>
 <h2 id="020-2026-11-01"><a href="https://github.com/enderkus/sadame/compare/v0.1.0...v0.2.0">0.2.0</a> - 2026-11-01<a class="headerlink" href="#020-2026-11-01" title="Permanent link">&para;</a></h2>
 <p>Rolling changes across a fleet, four more resource types, and Alpine
 services.</p>
-<h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
+<h3 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>--forks N</code> works on at most N hosts at once.</li>
 <li><code>--serial N</code> or <code>--serial N%</code> runs the hosts in batches, one after
@@ -1908,7 +2032,7 @@ services.</p>
 <li>Links to the project on X, <a href="https://x.com/sadame_rb">@sadame_rb</a>, in the
   docs' footer and the README.</li>
 </ul>
-<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<h3 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>In push mode's JSON, <code>hosts[].exit_status</code> is <code>null</code> for hosts that
   <code>--serial</code> skipped.</li>
@@ -1927,7 +2051,7 @@ services.</p>
 </ul>
 <h2 id="010-2026-11-01"><a href="https://github.com/enderkus/sadame/releases/tag/v0.1.0">0.1.0</a> - 2026-11-01<a class="headerlink" href="#010-2026-11-01" title="Permanent link">&para;</a></h2>
 <p>The first release.</p>
-<h3 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h3>
+<h3 id="added_2">Added<a class="headerlink" href="#added_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>sadame plan</code> and <code>sadame apply</code> for the local machine, with a colored
   unified diff, per-resource results, <code>--json</code> output and documented exit

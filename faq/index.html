@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../recipes/notifications/" class="md-nav__link">
         
   
@@ -1301,6 +1329,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#can-a-recipe-see-how-much-memory-or-how-many-cpus-a-machine-has" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can a recipe see how much memory or how many CPUs a machine has?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-is-this-different-from-ansible" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1903,6 +1942,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#can-a-recipe-see-how-much-memory-or-how-many-cpus-a-machine-has" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can a recipe see how much memory or how many CPUs a machine has?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-is-this-different-from-ansible" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2055,6 +2105,10 @@ classes are available. Most recipe logic needs no more.</p>
 and Arch Linux (including Omarchy), on x86_64 and ARM64. <code>service</code> works
 with systemd, and with OpenRC on Alpine. The machine running sadame can be
 Linux or macOS. Windows is not supported, as a target or otherwise.</p>
+<h3 id="can-a-recipe-see-how-much-memory-or-how-many-cpus-a-machine-has">Can a recipe see how much memory or how many CPUs a machine has?<a class="headerlink" href="#can-a-recipe-see-how-much-memory-or-how-many-cpus-a-machine-has" title="Permanent link">&para;</a></h3>
+<p>Yes: <code>facts[:memory_mb]</code>, <code>facts[:cpus]</code>, the machine's addresses and more,
+read on the machine when the recipe asks. <code>sadame facts -g web</code> shows them
+for each host. See <a href="../recipes/facts/">Facts</a>.</p>
 <h3 id="how-is-this-different-from-ansible">How is this different from Ansible?<a class="headerlink" href="#how-is-this-different-from-ansible" title="Permanent link">&para;</a></h3>
 <p>Recipes are Ruby rather than YAML, targets need no Python, <code>plan</code> shows
 every change as a diff, and <code>drift</code> gives CI a yes-or-no answer. Ansible

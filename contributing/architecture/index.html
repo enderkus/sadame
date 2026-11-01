@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -2282,6 +2310,11 @@ runtimes, which catches most mistakes, but these are the ones that come up:</p>
 <td><code>catch</code> / <code>throw</code></td>
 <td>not built in</td>
 <td>return values</td>
+</tr>
+<tr>
+<td><code>send</code>, <code>instance_variable_get</code>, <code>define_singleton_method</code> and the rest of mruby-metaprog</td>
+<td>the test build has it, through mruby-mtest, so unit tests pass; release builds do not</td>
+<td>call methods directly, or choose with <code>case</code></td>
 </tr>
 <tr>
 <td><code>File.basename(path, ".rb")</code></td>

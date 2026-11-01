@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -2107,6 +2135,10 @@ and its translation, which the test suite applies on Debian and Ubuntu.</p>
 <td>Ruby <code>if</code></td>
 </tr>
 <tr>
+<td><code>ansible_facts</code>: <code>ansible_processor_vcpus</code>, <code>ansible_memtotal_mb</code>, <code>ansible_default_ipv4.address</code></td>
+<td><code>facts[:cpus]</code>, <code>facts[:memory_mb]</code>, <code>facts[:ipv4]</code>; read when used, no <code>gather_facts</code></td>
+</tr>
+<tr>
 <td><code>loop:</code></td>
 <td>Ruby <code>each</code></td>
 </tr>
@@ -2393,8 +2425,9 @@ vars override the groups it includes. Ansible has many more layers
 <h2 id="gaps">Gaps<a class="headerlink" href="#gaps" title="Permanent link">&para;</a></h2>
 <p>Things Ansible does that sadame does not:</p>
 <ul>
-<li>no facts gathering beyond <code>platform</code> (os-release) and <code>host_name</code>,
-  <code>host_groups</code>;</li>
+<li>sixteen facts (CPUs, memory, disk, addresses, virtualization) rather
+  than Ansible's hundreds: no package, service or mount facts, no
+  <code>facts.d</code>;</li>
 <li>ten resource types (<code>package</code>, <code>file</code>, <code>line</code>, <code>directory</code>, <code>link</code>,
   <code>service</code>, <code>exec</code>, <code>user</code>, <code>group</code>, <code>git</code>) where Ansible has thousands
   of modules: no <code>apt_repository</code>, <code>mount</code>, <code>sysctl</code>, <code>firewalld</code> and so

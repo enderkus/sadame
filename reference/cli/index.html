@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1945,8 +1973,9 @@
 
 
 <h1 id="command-line">Command line<a class="headerlink" href="#command-line" title="Permanent link">&para;</a></h1>
-<p><code>sadame</code> has four commands: <code>plan</code>, <code>apply</code> and <code>drift</code> run a recipe, and
-<code>hosts</code> shows which machines a selection reaches. Each takes the same
+<p><code>sadame</code> has five commands: <code>plan</code>, <code>apply</code> and <code>drift</code> run a recipe,
+<code>hosts</code> shows which machines a selection reaches, and <code>facts</code> shows what
+recipes see on them. Each takes the same
 target and output options, so a command line that plans a change also
 applies it after replacing <code>plan</code> with <code>apply</code>. This page lists every
 command, option, environment variable and file; the
@@ -1964,10 +1993,12 @@ Commands:
   apply    Make the hosts match the recipe.
   drift    Like plan, but exit 1 when a host differs from the recipe.
   hosts    Show the selected hosts with their connection options and vars.
+  facts    Show the facts recipes see on each host: CPUs, memory, addresses.
 
 RECIPE is a recipe file or a directory containing recipe.rb
 (default: ./recipe.rb). vars.rb and hosts.rb next to it are loaded if
-present. Without -h, -g or --limit, sadame runs on this machine.
+present; hosts and facts only use those. Without -h, -g or --limit,
+sadame runs on this machine.
 
 Targets:
   -h, --host [USER@]HOST[:PORT],...   Run on these hosts over SSH
@@ -2030,6 +2061,11 @@ Exit status:
 <td>no</td>
 <td>Prints the selected hosts, their connection options and vars, and where each var came from. Connects to nothing.</td>
 </tr>
+<tr>
+<td><code>facts</code></td>
+<td>no</td>
+<td>Prints the <a href="../../recipes/facts/">facts</a> recipes see: of this machine, or with <code>-h</code>, <code>-g</code> or <code>--limit</code>, of each selected host over SSH. Runs no recipe.</td>
+</tr>
 </tbody>
 </table>
 <p><code>plan</code>, <code>apply</code> and <code>drift</code> are explained together in
@@ -2059,7 +2095,9 @@ Exit status:
 </table>
 <p><code>vars.rb</code> and <code>hosts.rb</code> in the recipe's directory are loaded when they
 exist. Templates and files are looked up next to the recipe, then in its
-<code>templates/</code> and <code>files/</code> directories. <code>hosts</code> does not need a recipe.</p>
+<code>templates/</code> and <code>files/</code> directories. <code>hosts</code> and <code>facts</code> do not need a
+recipe; given one, or a directory, they use the <code>hosts.rb</code> and <code>vars.rb</code>
+next to it.</p>
 <h2 id="targets">Targets<a class="headerlink" href="#targets" title="Permanent link">&para;</a></h2>
 <p>Without any of these options, sadame runs on the machine it is started on.
 With any of them, it runs on the selected hosts over SSH, copying itself
@@ -2161,7 +2199,7 @@ and the recipe there first (see <a href="../../guides/remote-hosts/">Remote host
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code>$ sadame --version
-sadame 0.2.0
+sadame 0.3.0
 </code></pre></div>
 <h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
 <table>

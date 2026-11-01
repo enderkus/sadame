@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../recipes/notifications/" class="md-nav__link">
         
   
@@ -1901,7 +1929,7 @@ add-ons can do more.</p>
 </tr>
 <tr>
 <td><strong>Maturity</strong></td>
-<td>0.2.0, November 2026: ten resource types, one maintainer</td>
+<td>0.3.0, November 2026: ten resource types, one maintainer</td>
 <td>since 2012, maintained by Red Hat, thousands of modules</td>
 <td>since 2013, community maintained</td>
 <td>since 2016, community maintained</td>
@@ -1919,13 +1947,14 @@ add-ons can do more.</p>
   devices.</li>
 <li><strong>No secrets management.</strong> Nothing like Ansible Vault or Chef's
   encrypted data bags; read secrets from the environment in <code>vars.rb</code>.</li>
-<li><strong>No facts beyond the basics.</strong> Recipes see <code>platform</code> (from
-  <code>/etc/os-release</code>), <code>host_name</code> and <code>host_groups</code>, not the hardware,
-  network or package facts that Ansible, Chef (Ohai) and Puppet (Facter)
-  gather.</li>
+<li><strong>Fewer facts.</strong> Recipes see <code>platform</code> (from <code>/etc/os-release</code>) and
+  sixteen <a href="../recipes/facts/">facts</a> about CPUs, memory, disk, addresses and
+  virtualization. Ansible, Chef (Ohai) and Puppet (Facter) gather many
+  more, including installed packages and services, and take custom facts
+  from plugins.</li>
 <li><strong>No ecosystem.</strong> No Galaxy, Supermarket or Forge; recipes are shared
   as files.</li>
-<li><strong>Young.</strong> Two releases, tested on five distributions and in CI, with
+<li><strong>Young.</strong> Three releases, tested on five distributions and in CI, with
   none of the years of production use the others have.</li>
 </ul>
 <h2 id="where-it-fits">Where it fits<a class="headerlink" href="#where-it-fits" title="Permanent link">&para;</a></h2>

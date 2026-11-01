@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1476,6 +1504,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#facts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        facts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#using-it-with-jq" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1892,6 +1931,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#facts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        facts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#using-it-with-jq" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1959,7 +2009,7 @@ load) go to standard error, and standard output stays empty.</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame drift examples/10-drift-demo --json
 {
   "format_version": 1,
-  "sadame_version": "0.2.0",
+  "sadame_version": "0.3.0",
   "command": "drift",
   "host": "local",
   "platform": {
@@ -2382,7 +2432,7 @@ nested under <code>hosts</code>:</p>
 <tr>
 <td><code>command</code></td>
 <td>string</td>
-<td><code>"plan"</code>, <code>"apply"</code> or <code>"drift"</code>.</td>
+<td><code>"plan"</code>, <code>"apply"</code>, <code>"drift"</code> or <code>"facts"</code>.</td>
 </tr>
 <tr>
 <td><code>hosts</code></td>
@@ -2431,7 +2481,7 @@ edited by hand:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift site.rb -h web2.example.com --json
 {
   "format_version": 1,
-  "sadame_version": "0.2.0",
+  "sadame_version": "0.3.0",
   "command": "drift",
   "hosts": [
     {
@@ -2441,7 +2491,7 @@ edited by hand:</p>
       "error": null,
       "report": {
         "format_version": 1,
-        "sadame_version": "0.2.0",
+        "sadame_version": "0.3.0",
         "command": "drift",
         "host": "web2.example.com",
         "platform": {
@@ -2528,9 +2578,54 @@ edited by hand:</p>
     }
   ],
   "exit_status": 1,
-  "duration_seconds": 0.23
+  "duration_seconds": 0.21
 }
 </code></pre></div>
+<h2 id="facts">facts<a class="headerlink" href="#facts" title="Permanent link">&para;</a></h2>
+<p><code>sadame facts --json</code> prints one document per machine. With <code>-h</code>, <code>-g</code> or
+<code>--limit</code>, each host's document is the <code>report</code> of the push-mode document
+below.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format_version</code></td>
+<td>integer</td>
+<td>As above.</td>
+</tr>
+<tr>
+<td><code>sadame_version</code></td>
+<td>string</td>
+<td>Version of sadame that read the facts.</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>string</td>
+<td><code>"facts"</code>.</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>string</td>
+<td>The host's name, as in a report.</td>
+</tr>
+<tr>
+<td><code>platform</code></td>
+<td>object</td>
+<td>See <a href="#platform">platform</a>.</td>
+</tr>
+<tr>
+<td><code>facts</code></td>
+<td>object</td>
+<td>Every fact by name, as in <a href="../../recipes/facts/#the-facts">Facts</a>; <code>null</code> for what could not be read.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="using-it-with-jq">Using it with jq<a class="headerlink" href="#using-it-with-jq" title="Permanent link">&para;</a></h2>
 <p>Resources that differ, from a saved drift report:</p>
 <div class="highlight"><pre><span></span><code>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'.resources[] | select(.status != "unchanged") | "\(.id): \(.status)"'</span><span class="w"> </span>drift.json

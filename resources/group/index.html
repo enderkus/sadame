@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1938,7 +1966,7 @@ and <code>delgroup</code> instead. BusyBox cannot change a gid; declare
 </code></pre></div>
 <h3 id="groups-on-a-new-server">Groups on a new server<a class="headerlink" href="#groups-on-a-new-server" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/group
-sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + group[app]
     state: absent -&gt; present
@@ -1950,7 +1978,7 @@ sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 
 $ sudo sadame apply examples/resources/group
-sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    group[app]
            state: absent -&gt; present

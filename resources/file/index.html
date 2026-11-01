@@ -562,6 +562,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../recipes/facts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../recipes/notifications/" class="md-nav__link">
         
   
@@ -1922,7 +1950,7 @@ written.</p>
 <td><code>template</code></td>
 <td>String</td>
 <td>none</td>
-<td>ERB template, rendered with <code>vars</code> and <code>locals</code>. Looked up next to the recipe, then in its <code>templates/</code> directory. Absolute paths are used as is.</td>
+<td>ERB template, rendered with <code>vars</code>, <code>locals</code> and <a href="../../recipes/facts/"><code>facts</code></a>. Looked up next to the recipe, then in its <code>templates/</code> directory. Absolute paths are used as is.</td>
 </tr>
 <tr>
 <td><code>source</code></td>
@@ -2024,7 +2052,7 @@ replaced, the file keeps its current mode, owner and group.</p>
 </code></pre></div>
 <h3 id="first-apply">First apply<a class="headerlink" href="#first-apply" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/file
-sadame 0.2.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    file[/etc/issue.net]
            --- /etc/issue.net
@@ -2067,12 +2095,12 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.38s.
+Finished in 0.39s.
 </code></pre></div>
 <h3 id="changing-a-template-variable">Changing a template variable<a class="headerlink" href="#changing-a-template-variable" title="Permanent link">&para;</a></h3>
 <p>Rendering with a different var shows exactly which lines change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/file --var environment=production
-sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/hello/hello.conf]
     --- /etc/hello/hello.conf
@@ -2103,7 +2131,7 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 4 unchanged.
 <div class="highlight"><pre><span></span><code>$ sudo chmod 0644 /etc/hello/hello.conf
 
 $ sudo sadame plan examples/resources/file
-sadame 0.2.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.3.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/hello/hello.conf]
     mode: 0644 -&gt; 0640
