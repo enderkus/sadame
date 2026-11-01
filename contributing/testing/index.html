@@ -1746,7 +1746,11 @@ are private, so the details live in <code>test/integration/vm/hosts.local.rb</co
 which git ignores. <code>hosts.example.rb</code> next to it shows the shape: one group
 per distribution with the VM's address, user, port, sudo, and vars naming
 its libvirt domain and clean snapshot, plus a <code>hypervisor</code> group for the
-machine running libvirt.</p>
+machine running libvirt. The VM hosts use
+<code>StrictHostKeyChecking=accept-new</code>, because sadame connects with
+<code>BatchMode=yes</code> and example 07 moves SSH to a port whose host key is not
+in <code>known_hosts</code> yet; accept-new records an unknown key and still refuses
+one that changed.</p>
 <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>test/integration/vm/hosts.example.rb<span class="w"> </span>test/integration/vm/hosts.local.rb<span class="w">   </span><span class="c1"># then edit it</span>
 rake<span class="w"> </span>build:linux-amd64
 rake<span class="w"> </span><span class="s2">"vm:reset[debian]"</span><span class="w">     </span><span class="c1"># revert the debian VM to its clean snapshot (virsh over SSH)</span>
