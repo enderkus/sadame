@@ -1670,6 +1670,11 @@ any guard, the command runs on every <code>apply</code>.</p>
 that exits non-zero fails the resource: <code>apply</code> prints the exit status and
 the command's error output, marks the resource <code>failed</code>, and skips the
 resources after it.</p>
+<p>Every command sadame runs, including yours, runs in the <code>C.UTF-8</code> locale
+(<code>LC_ALL=C.UTF-8</code>, <code>LANGUAGE</code> unset), so programs answer in English
+whatever the language of the machine or of the SSH session: a guard such as
+<code>not_if: "ufw status | grep -q 'Status: active'"</code> matches on every system.
+Set <code>LC_ALL</code> inside the command if it needs another locale.</p>
 <p>Other resources can trigger the command with
 <code>notifies: [:run, "exec[NAME]"]</code>. Combined with <code>action: :nothing</code>, that
 gives a command that runs only when something else changed, such as

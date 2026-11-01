@@ -1764,13 +1764,19 @@ rake<span class="w"> </span><span class="s2">"vm:reset[debian]"</span><span clas
 rake<span class="w"> </span><span class="s2">"vm:test[debian]"</span><span class="w">      </span><span class="c1"># reset, push every example that applies, check drift after each</span>
 rake<span class="w"> </span>vm:test:all<span class="w">            </span><span class="c1"># every VM in hosts.local.rb</span>
 </code></pre></div>
-<p><code>vm:test</code> reverts the VM, then pushes each applicable example to it from
-the machine running the tests, through the inventory, and checks that
-<code>drift</code> exits <code>0</code>. <code>07-hardening-baseline</code> runs last, because it moves SSH
-to port 2222, and its drift check connects to the new port. For example 03,
-Pebble is started on the VM first. On the Omarchy VM only examples 01 and
-12 run; example 12 runs on no other VM. Without <code>hosts.local.rb</code>, the <code>vm:</code>
-tasks print what is missing and exit <code>0</code>.</p>
+<p><code>vm:test</code> reverts the VM to its clean snapshot before each applicable
+example, as the Docker tests start each example in a fresh container, then
+pushes the example to it from the machine running the tests, through the
+inventory, and checks that <code>drift</code> exits <code>0</code>. After each revert the VM's
+clock is set from the machine running the tests: a snapshot taken while
+the VM was running resumes with the time it was taken. Take snapshots with
+the VM shut off where you can, so each test starts with a real boot; a VM
+with an encrypted disk, such as a default Omarchy install, needs a
+snapshot taken while it runs, or it waits for the passphrase. The drift
+check of <code>07-hardening-baseline</code> connects to the port SSH moved to. For
+example 03, Pebble is started on the VM first. On the Omarchy VM only
+examples 01 and 12 run; example 12 runs on no other VM. Without
+<code>hosts.local.rb</code>, the <code>vm:</code> tasks print what is missing and exit <code>0</code>.</p>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Stale binaries.</strong> The Docker and VM tests run whatever is in <code>dist/</code>.
