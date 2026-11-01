@@ -1288,6 +1288,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/omarchy-workstation/" class="md-nav__link">
         
   
@@ -1997,6 +2053,12 @@ the package should keep owning it and you only need one setting.</p>
 <td>none</td>
 <td>Actions to run on this resource when another one changes.</td>
 </tr>
+<tr>
+<td><code>tags</code></td>
+<td>Symbol, String, or an Array of them</td>
+<td>none</td>
+<td>Tags for running part of a recipe with <code>--tags</code> and <code>--skip-tags</code>. See <a href="../../recipes/tags/">Tags</a>.</td>
+</tr>
 </tbody>
 </table>
 <p>Without <code>match</code>, the line is appended when no line in the file is exactly
@@ -2039,7 +2101,7 @@ the same recipe installs, plan shows the line being added to a file that
 commented-out default line becomes the setting, so the file still reads in
 the order the package wrote it:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/line
-sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + directory[/run/sshd]
     state: absent -&gt; present
@@ -2086,7 +2148,7 @@ sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 1 to create, 3 to update, 0 to remove, 0 to run, 2 unchanged.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/line
-sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  package[openssh-server]
 unchanged  exec[ssh-keygen -A]
@@ -2142,7 +2204,7 @@ Summary
 Finished in 0.57s.
 
 $ sudo sadame plan examples/resources/line
-sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 6 unchanged.
 </code></pre></div>

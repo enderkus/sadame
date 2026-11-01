@@ -1158,6 +1158,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../guides/sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../guides/omarchy-workstation/" class="md-nav__link">
         
   
@@ -1372,6 +1428,28 @@
     <span class="md-ellipsis">
       
         Can CI check recipes without access to the servers?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#does-my-editor-know-about-recipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does my editor know about recipes?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#can-recipes-be-shared-between-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can recipes be shared between projects?
       
     </span>
   </a>
@@ -2003,6 +2081,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#does-my-editor-know-about-recipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does my editor know about recipes?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#can-recipes-be-shared-between-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can recipes be shared between projects?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-is-this-different-from-ansible" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2164,6 +2264,13 @@ for each host. See <a href="../recipes/facts/">Facts</a>.</p>
 the inventory, renders its templates and connects to nothing. It finds
 typos and template errors in pull requests that cannot read SSH secrets.
 See <a href="../reference/cli/#validate">Command line</a>.</p>
+<h3 id="does-my-editor-know-about-recipes">Does my editor know about recipes?<a class="headerlink" href="#does-my-editor-know-about-recipes" title="Permanent link">&para;</a></h3>
+<p>With <code>sadame lsp</code>, editors that speak the Language Server Protocol show
+recipe errors as you type and complete resources, options and facts. See
+<a href="../guides/editors/">Editor support</a> for Neovim, Helix and Emacs.</p>
+<h3 id="can-recipes-be-shared-between-projects">Can recipes be shared between projects?<a class="headerlink" href="#can-recipes-be-shared-between-projects" title="Permanent link">&para;</a></h3>
+<p>Yes, as git submodules: each project pins the version it uses. See
+<a href="../guides/sharing-recipes/">Sharing recipes</a>.</p>
 <h3 id="how-is-this-different-from-ansible">How is this different from Ansible?<a class="headerlink" href="#how-is-this-different-from-ansible" title="Permanent link">&para;</a></h3>
 <p>Recipes are Ruby rather than YAML, targets need no Python, <code>plan</code> shows
 every change as a diff, and <code>drift</code> gives CI a yes-or-no answer. Ansible

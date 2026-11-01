@@ -1282,6 +1282,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../omarchy-workstation/" class="md-nav__link">
         
   
@@ -1957,9 +2013,9 @@ and writes one JSON document with every host's report (see
 <p>On the console, the same run shows each host's differences prefixed with
 its name, and a summary:</p>
 <div class="highlight"><pre><span></span><code>$ sadame drift site.rb --limit 'web*'
-[web1.example.com] sadame 0.4.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.5.0 drift on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
-[web2.example.com] sadame 0.4.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
+[web2.example.com] sadame 0.5.0 drift on web2.example.com (Debian GNU/Linux 12 (bookworm))
 [web2.example.com]
 [web2.example.com] ~ file[/etc/demo-app/web.conf]
 [web2.example.com]     --- /etc/demo-app/web.conf
@@ -1977,7 +2033,7 @@ Hosts
   web1.example.com  ok
   web2.example.com  drift
 
-drift on 2 hosts: 1 ok, 1 drift. Finished in 0.24s.
+drift on 2 hosts: 1 ok, 1 drift. Finished in 0.23s.
 
 $ echo $?
 1

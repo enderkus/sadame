@@ -1299,6 +1299,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/omarchy-workstation/" class="md-nav__link">
         
   
@@ -2006,6 +2062,12 @@ repository, or to keep a tool's source on a machine.</p>
 <td>none</td>
 <td>Actions to run on this resource when another one changes.</td>
 </tr>
+<tr>
+<td><code>tags</code></td>
+<td>Symbol, String, or an Array of them</td>
+<td>none</td>
+<td>Tags for running part of a recipe with <code>--tags</code> and <code>--skip-tags</code>. See <a href="../../recipes/tags/">Tags</a>.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
@@ -2047,7 +2109,7 @@ server's host key in their <code>~/.ssh/known_hosts</code>.</p>
 </code></pre></div>
 <h3 id="a-tagged-release-cloned-by-a-deploy-user">A tagged release, cloned by a deploy user<a class="headerlink" href="#a-tagged-release-cloned-by-a-deploy-user" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/git
-sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[git]
            state: absent -&gt; installed
@@ -2073,10 +2135,10 @@ Summary
   skipped      0
   notified     0
 
-Finished in 37.68s.
+Finished in 38.05s.
 
 $ sudo sadame plan examples/resources/git
-sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 4 unchanged.
 

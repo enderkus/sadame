@@ -1288,6 +1288,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/omarchy-workstation/" class="md-nav__link">
         
   
@@ -1985,6 +2041,12 @@ directory, and to keep application directories owned by the right user.</p>
 <td>none</td>
 <td>Actions to run on this resource when another one changes.</td>
 </tr>
+<tr>
+<td><code>tags</code></td>
+<td>Symbol, String, or an Array of them</td>
+<td>none</td>
+<td>Tags for running part of a recipe with <code>--tags</code> and <code>--skip-tags</code>. See <a href="../../recipes/tags/">Tags</a>.</td>
+</tr>
 </tbody>
 </table>
 <p>Creating runs <code>mkdir -p</code>, then <code>chmod</code> and <code>chown</code> for the attributes you
@@ -1999,7 +2061,7 @@ their own resources if they matter.</p>
 </code></pre></div>
 <h3 id="application-directories-on-a-new-server">Application directories on a new server<a class="headerlink" href="#application-directories-on-a-new-server" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/directory
-sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + directory[/srv/app]
     state: absent -&gt; present
@@ -2014,7 +2076,7 @@ sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 1 unchanged.
 
 $ sudo sadame apply examples/resources/directory
-sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    directory[/srv/app]
            state: absent -&gt; present
@@ -2037,7 +2099,7 @@ Summary
 Finished in 0.18s.
 
 $ sudo sadame plan examples/resources/directory
-sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 3 unchanged.
 </code></pre></div>

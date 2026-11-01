@@ -1299,6 +1299,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/omarchy-workstation/" class="md-nav__link">
         
   
@@ -2013,6 +2069,12 @@ account with <code>getent passwd</code> and <code>id -nG</code>, and changes it 
 <td>none</td>
 <td>Actions to run on this resource when another one changes.</td>
 </tr>
+<tr>
+<td><code>tags</code></td>
+<td>Symbol, String, or an Array of them</td>
+<td>none</td>
+<td>Tags for running part of a recipe with <code>--tags</code> and <code>--skip-tags</code>. See <a href="../../recipes/tags/">Tags</a>.</td>
+</tr>
 </tbody>
 </table>
 <p>New users that are not system users get a home directory (<code>useradd -m</code>).
@@ -2027,7 +2089,7 @@ files.</p>
 </code></pre></div>
 <h3 id="a-deploy-user-and-a-service-account">A deploy user and a service account<a class="headerlink" href="#a-deploy-user-and-a-service-account" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/user
-sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + user[deploy]
     state: absent -&gt; present
@@ -2042,7 +2104,7 @@ sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 0 unchanged.
 
 $ sudo sadame apply examples/resources/user
-sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    user[deploy]
            state: absent -&gt; present
@@ -2073,7 +2135,7 @@ uid=1000(deploy) gid=1000(deploy) groups=1000(deploy),4(adm)
 <span class="n">user</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w"> </span><span class="ss">groups</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="s2">"docker"</span><span class="o">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/user/docker_group.rb
-sadame 0.4.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[docker.io]
     state: absent -&gt; installed

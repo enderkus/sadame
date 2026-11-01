@@ -1156,6 +1156,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/omarchy-workstation/" class="md-nav__link">
         
   
@@ -2023,10 +2079,11 @@
 
 
 <h1 id="command-line">Command line<a class="headerlink" href="#command-line" title="Permanent link">&para;</a></h1>
-<p><code>sadame</code> has eight commands: <code>plan</code>, <code>apply</code> and <code>drift</code> run a recipe,
+<p><code>sadame</code> has nine commands: <code>plan</code>, <code>apply</code> and <code>drift</code> run a recipe,
 <code>validate</code> checks one without any machine, <code>hosts</code> shows which machines a
 selection reaches and <code>facts</code> what recipes see on them, <code>init</code> starts a
-project and <code>report</code> turns JSON reports into Markdown or JUnit. Each takes the same
+project, <code>report</code> turns JSON reports into Markdown or JUnit, and <code>lsp</code>
+serves editors. Each takes the same
 target and output options, so a command line that plans a change also
 applies it after replacing <code>plan</code> with <code>apply</code>. This page lists every
 command, option, environment variable and file; the
@@ -2040,6 +2097,7 @@ sadame<span class="w"> </span>apply<span class="w"> </span>examples/01-hello<spa
 Usage: sadame COMMAND [RECIPE] [options]
        sadame init [DIRECTORY] [--ci github|gitlab]
        sadame report FILE [--format markdown|junit]
+       sadame lsp
 
 Commands:
   init     Start a project: recipe.rb, vars.rb, hosts.rb, a template, and
@@ -2052,6 +2110,7 @@ Commands:
   facts    Show the facts recipes see on each host: CPUs, memory, addresses.
   report   Turn the --json output of plan, apply or drift into Markdown
            (for a CI summary page) or JUnit XML (for test reports).
+  lsp      Run a language server for editors, on stdin and stdout.
 
 RECIPE is a recipe file or a directory containing recipe.rb
 (default: ./recipe.rb). vars.rb and hosts.rb next to it are loaded if
@@ -2144,6 +2203,11 @@ Exit status:
 <td><code>report</code></td>
 <td>no</td>
 <td>Reads the <code>--json</code> output of <code>plan</code>, <code>apply</code> or <code>drift</code> from a file and prints it as Markdown or JUnit XML; see <a href="../../guides/drift-in-ci/#reading-the-report">Drift in CI</a>.</td>
+</tr>
+<tr>
+<td><code>lsp</code></td>
+<td>no</td>
+<td>A language server on stdin and stdout, which editors start; see <a href="../../guides/editors/">Editor support</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -2298,7 +2362,7 @@ and the recipe there first (see <a href="../../guides/remote-hosts/">Remote host
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code>$ sadame --version
-sadame 0.4.0
+sadame 0.5.0
 </code></pre></div>
 <h2 id="validate">validate<a class="headerlink" href="#validate" title="Permanent link">&para;</a></h2>
 <p><code>validate</code> evaluates the recipe the way <code>plan</code> does, but against a machine
@@ -2309,7 +2373,7 @@ options, notifications to resources that are not declared, missing
 templates and files, and template errors, for every selected host with its
 own name, groups and vars:</p>
 <div class="highlight"><pre><span></span><code>$ sadame validate examples/08-multi-role-inventory/site.rb -g all --platform ubuntu
-sadame 0.4.0 validate examples/08-multi-role-inventory/site.rb, as on Ubuntu 24.04 LTS
+sadame 0.5.0 validate examples/08-multi-role-inventory/site.rb, as on Ubuntu 24.04 LTS
 
   web1.example.com  ok     6 resources
   web2.example.com  ok     6 resources
@@ -2319,7 +2383,7 @@ validate on 3 hosts: 3 ok.
 </code></pre></div>
 <p>An error names the file and line:</p>
 <div class="highlight"><pre><span></span><code>$ sadame validate
-sadame 0.4.0 validate recipe.rb, as on Debian GNU/Linux 12 (bookworm)
+sadame 0.5.0 validate recipe.rb, as on Debian GNU/Linux 12 (bookworm)
 
   local  error  templates/app.conf.erb:3: undefined method 'port' for Sadame::Template::Scope
 

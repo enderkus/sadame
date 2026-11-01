@@ -1299,6 +1299,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/sharing-recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/editors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/omarchy-workstation/" class="md-nav__link">
         
   
@@ -1999,6 +2055,12 @@ releases, and to put a program on the <code>PATH</code>.</p>
 <td>none</td>
 <td>Actions to run on this resource when another one changes.</td>
 </tr>
+<tr>
+<td><code>tags</code></td>
+<td>Symbol, String, or an Array of them</td>
+<td>none</td>
+<td>Tags for running part of a recipe with <code>--tags</code> and <code>--skip-tags</code>. See <a href="../../recipes/tags/">Tags</a>.</td>
+</tr>
 </tbody>
 </table>
 <p>The link's directory must exist; declare it with a
@@ -2020,7 +2082,7 @@ the link should be is always an error, even with <code>force: true</code>.</p>
 </code></pre></div>
 <h3 id="releases-and-a-current-link">Releases and a current link<a class="headerlink" href="#releases-and-a-current-link" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/link
-sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    directory[/srv/app/releases/1]
            state: absent -&gt; present
@@ -2066,7 +2128,7 @@ release 2
 <div class="highlight"><pre><span></span><code>$ sudo ln -sfn releases/1 /srv/app/current
 
 $ sudo sadame drift examples/resources/link
-sadame 0.4.0 drift on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 drift on local (Debian GNU/Linux 12 (bookworm))
 
 ~ link[/srv/app/current]
     to: releases/1 -&gt; releases/2
@@ -2074,7 +2136,7 @@ sadame 0.4.0 drift on local (Debian GNU/Linux 12 (bookworm))
 Drift: 1 of 6 resources differs from the recipe.
 
 $ sudo sadame apply examples/resources/link
-sadame 0.4.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  directory[/srv/app/releases/1]
 unchanged  directory[/srv/app/releases/2]
@@ -2091,7 +2153,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.22s.
+Finished in 0.21s.
 </code></pre></div>
 <h3 id="reloading-a-service-when-a-link-changes">Reloading a service when a link changes<a class="headerlink" href="#reloading-a-service-when-a-link-changes" title="Permanent link">&para;</a></h3>
 <p>A link that enables a configuration can notify the service that reads it:</p>

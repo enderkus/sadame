@@ -53,6 +53,10 @@
          <lastmod>2026-11-01</lastmod>
     </url>
     <url>
+         <loc>https://enderkus.github.io/sadame/guides/editors/</loc>
+         <lastmod>2026-11-01</lastmod>
+    </url>
+    <url>
          <loc>https://enderkus.github.io/sadame/guides/migrate-from-ansible/</loc>
          <lastmod>2026-11-01</lastmod>
     </url>
@@ -70,6 +74,10 @@
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/remote-hosts/</loc>
+         <lastmod>2026-11-01</lastmod>
+    </url>
+    <url>
+         <loc>https://enderkus.github.io/sadame/guides/sharing-recipes/</loc>
          <lastmod>2026-11-01</lastmod>
     </url>
     <url>
