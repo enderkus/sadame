@@ -1693,7 +1693,16 @@ then applies again. <code>03-nginx-tls-certbot</code> gets a second container ru
 server, which accepts every challenge, so certbot really requests and
 installs a certificate without a public domain.</p>
 <p>The report lists every example as pass, fail or skip, with the reason for
-each skip and the last lines of output for each failure.</p>
+each skip and the last lines of output for each failure. Results also
+print one by one as examples finish.</p>
+<p>A command that runs longer than 15 minutes (30 under emulation) is killed
+and fails its example; set <code>SADAME_IT_TIMEOUT</code> in seconds to change that.
+If systemd in a container has not finished booting after 3 minutes (10
+under emulation), that example fails with the units systemd is still
+waiting for, and the examples not yet started fail at once. To run only
+some examples, set <code>SADAME_IT_ONLY</code> to text their path contains
+(<code>SADAME_IT_ONLY=03-nginx</code>); <code>SADAME_IT_JOBS</code> sets how many run at once
+(4 by default).</p>
 <p><code>rake test:push</code> is the push-mode part of this layer. It starts SSH servers
 that boot systemd: three targets named like <code>examples/08-multi-role-inventory</code>'s
 hosts, <code>db1.example.com</code> with sshd on port 2222, a bastion, and a host on a
