@@ -1863,13 +1863,16 @@ downloaded with a browser, remove the quarantine flag:</p>
 <div class="highlight"><pre><span></span><code>xattr<span class="w"> </span>-d<span class="w"> </span>com.apple.quarantine<span class="w"> </span>sadame-darwin-arm64
 </code></pre></div>
 <h2 id="homebrew">Homebrew<a class="headerlink" href="#homebrew" title="Permanent link">&para;</a></h2>
-<p>Not available yet. A tap is planned, so that
-<code>brew install enderkus/sadame/sadame</code> installs the macOS and Linux
-binaries.</p>
+<p>The formula for the release binaries, macOS and Linux, is in
+<code>homebrew/sadame.rb</code> in the repository. It is not published in a tap yet;
+until it is, use the install script.</p>
 <h2 id="arch-linux-aur">Arch Linux (AUR)<a class="headerlink" href="#arch-linux-aur" title="Permanent link">&para;</a></h2>
-<p>Not available yet. A <code>sadame-bin</code> package that installs the release binary
-is planned. Until then, use the install script, or <code>exec</code> it from your own
-recipe.</p>
+<p>A <code>sadame-bin</code> package that installs the release binary is in
+<code>packaging/aur/</code>, ready for the AUR but not submitted yet. Build and
+install it from a checkout:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>packaging/aur
+makepkg<span class="w"> </span>-si
+</code></pre></div>
 <h2 id="from-source">From source<a class="headerlink" href="#from-source" title="Permanent link">&para;</a></h2>
 <p>Run sadame from a checkout with Ruby 3.2 or newer, no build needed:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/enderkus/sadame.git
