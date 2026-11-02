@@ -2181,8 +2181,11 @@ examples 01 and 12 run; example 12 runs on no other VM. Without
 <code>hosts.local.rb</code>, the <code>vm:</code> tasks print what is missing and exit <code>0</code>.</p>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Stale binaries.</strong> The Docker and VM tests run whatever is in <code>dist/</code>.
-  Rebuild after changing <code>lib/</code>.</li>
+<li><strong>Stale binaries.</strong> The Docker, push and VM tests run the binaries in
+  <code>dist/</code>, which git does not track. They stop before they start when a
+  binary they need is older than the source (<code>lib/</code>, <code>tools/sadame/</code>,
+  <code>mrbgem.rake</code>, <code>build_config.rb</code>) and name the <code>rake build:...</code> task that
+  rebuilds it.</li>
 <li><strong>A new example without a matrix entry.</strong> The unit tests fail until the
   example is listed in <code>test/support/example_matrix.rb</code>, with a reason for
   each distribution it skips.</li>

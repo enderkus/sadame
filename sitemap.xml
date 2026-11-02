@@ -2,158 +2,158 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://enderkus.github.io/sadame/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/changelog/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/comparison/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/faq/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/getting-started/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/install/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/concepts/plan-apply-drift/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/contributing/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/contributing/architecture/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/contributing/building/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/contributing/testing/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/examples/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/drift-in-ci/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/editors/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/migrate-from-ansible/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/migrate-from-itamae/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/omarchy-workstation/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/provision-a-new-vps/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/remote-hosts/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/sharing-recipes/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/guides/team-workflow/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/recipes/basics/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/recipes/facts/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/recipes/inventory/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/recipes/notifications/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/recipes/tags/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/reference/cli/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/reference/exit-codes/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/reference/json-output/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/directory/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/exec/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/file/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/git/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/group/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/line/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/link/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/package/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/service/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
     <url>
          <loc>https://enderkus.github.io/sadame/resources/user/</loc>
-         <lastmod>2026-11-01</lastmod>
+         <lastmod>2026-11-02</lastmod>
     </url>
 </urlset>
