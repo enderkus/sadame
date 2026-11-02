@@ -2106,7 +2106,7 @@ gives a command that runs only when something else changed, such as
 </code></pre></div>
 <h3 id="plan-explains-why-each-command-will-run">Plan explains why each command will run<a class="headerlink" href="#plan-explains-why-each-command-will-run" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/exec
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + directory[/opt/demo]
     state: absent -&gt; present
@@ -2129,7 +2129,7 @@ Plan: 1 to create, 0 to update, 0 to remove, 3 to run, 1 unchanged.
 <code>only_if</code> guard skips it.</p>
 <h3 id="after-apply-the-guards-hold">After apply, the guards hold<a class="headerlink" href="#after-apply-the-guards-hold" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/exec
-sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    directory[/opt/demo]
            state: absent -&gt; present
@@ -2157,7 +2157,7 @@ Summary
 Finished in 0.19s.
 
 $ sudo sadame plan examples/resources/exec
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 5 unchanged.
 

@@ -2089,7 +2089,7 @@ files.</p>
 </code></pre></div>
 <h3 id="a-deploy-user-and-a-service-account">A deploy user and a service account<a class="headerlink" href="#a-deploy-user-and-a-service-account" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/user
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + user[deploy]
     state: absent -&gt; present
@@ -2104,7 +2104,7 @@ sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 2 to create, 0 to update, 0 to remove, 0 to run, 0 unchanged.
 
 $ sudo sadame apply examples/resources/user
-sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    user[deploy]
            state: absent -&gt; present
@@ -2135,7 +2135,7 @@ uid=1000(deploy) gid=1000(deploy) groups=1000(deploy),4(adm)
 <span class="n">user</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w"> </span><span class="ss">groups</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="s2">"docker"</span><span class="o">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/user/docker_group.rb
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[docker.io]
     state: absent -&gt; installed

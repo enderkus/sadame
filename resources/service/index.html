@@ -2156,7 +2156,7 @@ recipe works with OpenRC's commands. sadame checks for
 <p>sadame 0.1.0 supports systemd only.</p>
 </div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/service
-sadame 0.5.0 apply on local (Alpine Linux v3.20)
+sadame 0.5.1 apply on local (Alpine Linux v3.20)
 
 changed    package[nginx]
            state: absent -&gt; installed
@@ -2172,7 +2172,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 1.81s.
+Finished in 1.26s.
 
 $ rc-update show default
                 nginx | default
@@ -2239,7 +2239,7 @@ started. Each resource reads its current state right before it runs, so by
 the time <code>service[nginx]</code> is applied, only the running state is left to
 change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/service
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + package[nginx]
     state: absent -&gt; installed
@@ -2251,7 +2251,7 @@ sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 1 to create, 1 to update, 0 to remove, 0 to run, 0 unchanged.
 
 $ sudo sadame apply examples/resources/service
-sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[nginx]
            state: absent -&gt; installed
@@ -2266,7 +2266,7 @@ Summary
   skipped      0
   notified     0
 
-Finished in 5.27s.
+Finished in 4.88s.
 </code></pre></div>
 <h3 id="someone-stopped-and-disabled-it">Someone stopped and disabled it<a class="headerlink" href="#someone-stopped-and-disabled-it" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo systemctl stop nginx
@@ -2274,7 +2274,7 @@ Finished in 5.27s.
 $ sudo systemctl disable --quiet nginx
 
 $ sudo sadame plan examples/resources/service
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ service[nginx]
     enabled: false -&gt; true
@@ -2283,7 +2283,7 @@ sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 1 unchanged.
 
 $ sudo sadame apply examples/resources/service
-sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  package[nginx]
 changed    service[nginx]
@@ -2312,7 +2312,7 @@ Finished in 0.08s.
 <span class="n">service</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span><span class="w"> </span><span class="ss">enable</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="p">,</span><span class="w"> </span><span class="ss">state</span><span class="p">:</span><span class="w"> </span><span class="ss">:running</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/service/reload_on_change.rb
-sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    package[nginx]
            state: absent -&gt; installed
@@ -2339,7 +2339,7 @@ Summary
   skipped      0
   notified     1  service[nginx]: reload
 
-Finished in 5.33s.
+Finished in 4.11s.
 </code></pre></div>
 <p>On the next run nothing changes, so nothing is reloaded.</p>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>

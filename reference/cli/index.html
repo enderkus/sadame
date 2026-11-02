@@ -2362,7 +2362,7 @@ and the recipe there first (see <a href="../../guides/remote-hosts/">Remote host
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code>$ sadame --version
-sadame 0.5.0
+sadame 0.5.1
 </code></pre></div>
 <h2 id="validate">validate<a class="headerlink" href="#validate" title="Permanent link">&para;</a></h2>
 <p><code>validate</code> evaluates the recipe the way <code>plan</code> does, but against a machine
@@ -2373,7 +2373,7 @@ options, notifications to resources that are not declared, missing
 templates and files, and template errors, for every selected host with its
 own name, groups and vars:</p>
 <div class="highlight"><pre><span></span><code>$ sadame validate examples/08-multi-role-inventory/site.rb -g all --platform ubuntu
-sadame 0.5.0 validate examples/08-multi-role-inventory/site.rb, as on Ubuntu 24.04 LTS
+sadame 0.5.1 validate examples/08-multi-role-inventory/site.rb, as on Ubuntu 24.04 LTS
 
   web1.example.com  ok     6 resources
   web2.example.com  ok     6 resources
@@ -2383,7 +2383,7 @@ validate on 3 hosts: 3 ok.
 </code></pre></div>
 <p>An error names the file and line:</p>
 <div class="highlight"><pre><span></span><code>$ sadame validate
-sadame 0.5.0 validate recipe.rb, as on Debian GNU/Linux 12 (bookworm)
+sadame 0.5.1 validate recipe.rb, as on Debian GNU/Linux 12 (bookworm)
 
   local  error  templates/app.conf.erb:3: undefined method 'port' for Sadame::Template::Scope
 

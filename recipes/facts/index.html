@@ -2176,16 +2176,16 @@ reports it until it is applied.</p>
 <code>--limit</code> it connects to those hosts, as <code>plan</code> does, and prints theirs.
 <code>--json</code> prints them as JSON (see <a href="../../reference/json-output/#facts">JSON output</a>).</p>
 <div class="highlight"><pre><span></span><code>$ sadame facts
-sadame 0.5.0 facts on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 facts on local (Debian GNU/Linux 12 (bookworm))
 
-hostname           76237023158c
-fqdn               76237023158c
+hostname           3207ad2a2e73
+fqdn               3207ad2a2e73
 arch               x86_64
 kernel             7.2.12-orbstack-00394-gbecdd6130068
 cpus               10
 memory_mb          8003
 swap_mb            9027
-root_disk_gb       139
+root_disk_gb       140
 ipv4               192.168.215.2
 default_interface  eth0
 ipv4_addresses     192.168.215.2
@@ -2196,7 +2196,7 @@ service_manager    (none)
 machine_id         (none)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sadame facts -h web1.example.com
-[web1.example.com] sadame 0.5.0 facts on web1.example.com (Debian GNU/Linux 12 (bookworm))
+[web1.example.com] sadame 0.5.1 facts on web1.example.com (Debian GNU/Linux 12 (bookworm))
 [web1.example.com]
 [web1.example.com] hostname           web1
 [web1.example.com] fqdn               web1
@@ -2205,7 +2205,7 @@ machine_id         (none)
 [web1.example.com] cpus               10
 [web1.example.com] memory_mb          8003
 [web1.example.com] swap_mb            9027
-[web1.example.com] root_disk_gb       139
+[web1.example.com] root_disk_gb       140
 [web1.example.com] ipv4               192.168.107.3
 [web1.example.com] default_interface  eth0
 [web1.example.com] ipv4_addresses     192.168.107.3
@@ -2213,12 +2213,12 @@ machine_id         (none)
 [web1.example.com] virtualization     docker
 [web1.example.com] container          true
 [web1.example.com] service_manager    systemd
-[web1.example.com] machine_id         b48db360bd6242eeabecfbd99fa246b1
+[web1.example.com] machine_id         d9eb31414e07441d850ab7344644b841
 
 Hosts
   web1.example.com  ok
 
-facts on 1 host: 1 ok. Finished in 0.23s.
+facts on 1 host: 1 ok. Finished in 0.22s.
 </code></pre></div>
 <h2 id="scenarios">Scenarios<a class="headerlink" href="#scenarios" title="Permanent link">&para;</a></h2>
 <div class="highlight"><span class="filename">examples/facts/recipe.rb</span><pre><span></span><code><span class="c1"># What a recipe can know about the machine it runs on. Each fact is read on</span>
@@ -2257,7 +2257,7 @@ facts on 1 host: 1 ok. Finished in 0.23s.
 <p>The container has no <code>/etc/machine-id</code>, so the minute comes from the
 hostname, and <code>container</code> is true, so the kernel setting is left out:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/facts
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/motd]
     --- /etc/motd
@@ -2270,8 +2270,8 @@ sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
     -
     -Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
     -permitted by applicable law.
-    +76237023158c, docker
-    +10 CPUs, 8003 MB of memory, 139 GB on /
+    +3207ad2a2e73, docker
+    +10 CPUs, 8003 MB of memory, 140 GB on /
     +192.168.215.2 on eth0
     +Managed by sadame.
 
@@ -2295,7 +2295,7 @@ sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
     --- /dev/null
     +++ /etc/demo-app/nightly.schedule (desired)
     @@ -0,0 +1 @@
-    +11 4 * * *
+    +25 4 * * *
 
 Plan: 3 to create, 1 to update, 0 to remove, 0 to run, 0 unchanged.
 </code></pre></div>

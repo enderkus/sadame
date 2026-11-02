@@ -1952,11 +1952,11 @@ the change, and <code>drift</code> confirms the server matches:</p>
 
 $ sadame apply site.rb -g db
 [db1.example.com] changed    file[/etc/cron.d/demo-db-backup]
-apply on 1 host: 1 ok. Finished in 0.23s.
+apply on 1 host: 1 ok. Finished in 0.21s.
 
 $ sadame drift site.rb -g db
 [db1.example.com] No drift: 6 resources match the recipe.
-drift on 1 host: 1 ok. Finished in 0.23s.
+drift on 1 host: 1 ok. Finished in 0.21s.
 $ echo $?
 0
 </code></pre></div>

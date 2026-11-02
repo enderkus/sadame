@@ -2142,7 +2142,7 @@ replaced, the file keeps its current mode, owner and group.</p>
 </code></pre></div>
 <h3 id="first-apply">First apply<a class="headerlink" href="#first-apply" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/file
-sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 apply on local (Debian GNU/Linux 12 (bookworm))
 
 changed    file[/etc/issue.net]
            --- /etc/issue.net
@@ -2185,12 +2185,12 @@ Summary
   skipped      0
   notified     0
 
-Finished in 0.38s.
+Finished in 0.39s.
 </code></pre></div>
 <h3 id="changing-a-template-variable">Changing a template variable<a class="headerlink" href="#changing-a-template-variable" title="Permanent link">&para;</a></h3>
 <p>Rendering with a different var shows exactly which lines change:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/file --var environment=production
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/hello/hello.conf]
     --- /etc/hello/hello.conf
@@ -2221,7 +2221,7 @@ Plan: 0 to create, 1 to update, 0 to remove, 0 to run, 4 unchanged.
 <div class="highlight"><pre><span></span><code>$ sudo chmod 0644 /etc/hello/hello.conf
 
 $ sudo sadame plan examples/resources/file
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 ~ file[/etc/hello/hello.conf]
     mode: 0644 -&gt; 0640

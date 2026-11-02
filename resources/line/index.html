@@ -2101,7 +2101,7 @@ the same recipe installs, plan shows the line being added to a file that
 commented-out default line becomes the setting, so the file still reads in
 the order the package wrote it:</p>
 <div class="highlight"><pre><span></span><code>$ sudo sadame plan examples/resources/line
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 + directory[/run/sshd]
     state: absent -&gt; present
@@ -2148,7 +2148,7 @@ sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
 Plan: 1 to create, 3 to update, 0 to remove, 0 to run, 2 unchanged.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ sudo sadame apply examples/resources/line
-sadame 0.5.0 apply on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 apply on local (Debian GNU/Linux 12 (bookworm))
 
 unchanged  package[openssh-server]
 unchanged  exec[ssh-keygen -A]
@@ -2204,7 +2204,7 @@ Summary
 Finished in 0.57s.
 
 $ sudo sadame plan examples/resources/line
-sadame 0.5.0 plan on local (Debian GNU/Linux 12 (bookworm))
+sadame 0.5.1 plan on local (Debian GNU/Linux 12 (bookworm))
 
 Plan: 0 to create, 0 to update, 0 to remove, 0 to run, 6 unchanged.
 </code></pre></div>
